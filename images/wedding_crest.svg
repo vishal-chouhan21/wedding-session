@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eed48f"/>
+      <stop offset="35%" stop-color="#cda240"/>
+      <stop offset="70%" stop-color="#f5e1a4"/>
+      <stop offset="100%" stop-color="#996f1b"/>
+    </linearGradient>
+    <radialGradient id="pearl" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="75%" stop-color="#fffbf7"/>
+      <stop offset="100%" stop-color="#f5ede0"/>
+    </radialGradient>
+    <radialGradient id="roseWash" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fedee3" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#fad0d7" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#fad0d7" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#802030" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Base Circle -->
+  <circle cx="150" cy="150" r="142" fill="url(#pearl)" stroke="url(#gold)" stroke-width="4.5" filter="url(#softGlow)"/>
+  <circle cx="150" cy="150" r="137" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.6"/>
+
+  <!-- Outer Solid Hexagon -->
+  <!-- Center is (150, 150), radius ~95 -->
+  <polygon points="
+    150,55 
+    232,102 
+    232,198 
+    150,245 
+    68,198 
+    68,102" 
+    fill="none" stroke="url(#gold)" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- Inner Dashed Hexagon (radius ~86) -->
+  <polygon points="
+    150,64 
+    224,107 
+    224,193 
+    150,236 
+    76,193 
+    76,107" 
+    fill="none" stroke="url(#gold)" stroke-width="1.6" stroke-dasharray="5 3.5" stroke-linejoin="round"/>
+
+  <!-- Gold Accent Dots on Hexagon -->
+  <circle cx="109" cy="84" r="3.5" fill="url(#gold)"/>
+  <circle cx="191" cy="216" r="3.5" fill="url(#gold)"/>
+  <circle cx="224" cy="150" r="2.2" fill="url(#gold)" opacity="0.75"/>
+  <circle cx="76" cy="150" r="2.2" fill="url(#gold)" opacity="0.75"/>
+
+  <!-- Watercolor Rose Seal in Center -->
+  <circle cx="150" cy="150" r="42" fill="url(#roseWash)"/>
+  
+  <!-- Rose Ring Stroke -->
+  <circle cx="150" cy="150" r="34" fill="none" stroke="#d96a84" stroke-width="2.2" stroke-dasharray="24 4 18 3" opacity="0.85"/>
+  <circle cx="150" cy="150" r="38" fill="none" stroke="#e898aa" stroke-width="1" stroke-dasharray="14 5 20 4" opacity="0.5"/>
+
+  <!-- Couple Monogram: K & I -->
+  <text x="150" y="146" text-anchor="middle" font-family="'Cinzel', 'Playfair Display', serif" font-size="28" font-weight="700" fill="#6e1f2f" letter-spacing="1">K &amp; I</text>
+  <text x="150" y="165" text-anchor="middle" font-family="'Montserrat', 'Cinzel', sans-serif" font-size="8.5" font-weight="600" fill="#b88a2c" letter-spacing="3.5">OCTOBER 19</text>
+</svg>
