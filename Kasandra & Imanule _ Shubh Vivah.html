@@ -61,42 +61,114 @@ section{padding:clamp(3.5rem,9vw,6rem) 1.25rem;text-align:center;position:relati
 .fam h3{color:var(--maroon);font-size:1.6rem}.fam .tag{display:block;margin-bottom:.3rem}
 
 /* shared slider navigation & controls */
-.ev-scroll .card, .gal-scroll .gal-card {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
-}
-.slider-wrap-box{position:relative;max-width:1160px;margin:2rem auto 0;padding:0 3.2rem}
-@media(max-width:768px){.slider-wrap-box{padding:0 1rem}}
-.slider-nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:var(--maroon);color:var(--gold2);border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;box-shadow:0 8px 24px rgba(59,9,18,.35);transition:all .3s cubic-bezier(0.16,1,0.3,1)}
-.slider-nav-btn:hover{background:var(--gold);color:var(--deep);transform:translateY(-50%) scale(1.1);box-shadow:0 12px 30px rgba(212,168,75,.45)}
-.slider-nav-btn.prev{left:0}
-.slider-nav-btn.next{right:0}
-@media(max-width:768px){.slider-nav-btn{display:none}}
+.slider-wrap-box{position:relative;max-width:1160px;margin:1.8rem auto 0;padding:0;overflow:hidden}
+.slider-nav-btn{display:none !important}
 .slider-dots{display:flex;justify-content:center;align-items:center;gap:.5rem;margin-top:1.25rem;margin-bottom:.35rem}
 .slider-dot{width:8px;height:8px;border-radius:50%;background:rgba(212,168,75,.3);border:1px solid var(--gold);cursor:pointer;transition:all .3s ease}
 .slider-dot.active{width:24px;border-radius:12px;background:var(--gold)}
 .slider-hint-text{text-align:center;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);opacity:.9;margin-top:.4rem;margin-bottom:1.5rem;font-family:var(--sans)}
 
-/* events slider */
-#events{background:var(--cream)}
-.ev-scroll{display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:.5rem .25rem 1.25rem;cursor:grab;scrollbar-width:none;text-align:left}
-.ev-scroll:active{cursor:grabbing}
-.ev-scroll::-webkit-scrollbar{display:none}
+/* scrollers */
+.ev-scroll, .gal-scroll{
+  display:flex;
+  gap:1.25rem;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  padding:.5rem .35rem 1.25rem;
+  cursor:grab;
+  scrollbar-width:none;
+  text-align:left;
+}
+.ev-scroll:active, .gal-scroll:active{cursor:grabbing}
+.ev-scroll::-webkit-scrollbar, .gal-scroll::-webkit-scrollbar{display:none}
 
-.card{flex:0 0 320px;width:320px;height:470px;min-height:470px;max-height:470px;scroll-snap-align:center;display:flex;flex-direction:column;background:var(--ivory);border:1.5px solid var(--gold);border-radius:6px;overflow:hidden;position:relative;transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s ease,border-color .3s;box-sizing:border-box}
-@media(max-width:600px){.card{flex:0 0 285px;width:285px;height:470px;min-height:470px;max-height:470px}}
-.card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(92,15,29,.2);border-color:var(--gold2)}
-.card.main{background:linear-gradient(135deg,var(--maroon),var(--deep));color:var(--cream);border-color:var(--gold)}
+/* cards: identical dimensions and aesthetic */
+.card, .gal-card{
+  flex:0 0 320px;
+  width:320px;
+  height:470px;
+  min-height:470px;
+  max-height:470px;
+  scroll-snap-align:center;
+  display:flex;
+  flex-direction:column;
+  background:#fff9ec;
+  border:1.5px solid rgba(212,168,75,.45);
+  border-radius:6px;
+  overflow:hidden;
+  position:relative;
+  transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s ease,border-color .3s;
+  box-sizing:border-box;
+  cursor:pointer;
+  opacity:1 !important;
+  transform:none !important;
+  visibility:visible !important;
+}
+@media(max-width:600px){
+  .card, .gal-card{
+    flex:0 0 285px;
+    width:285px;
+    height:470px;
+    min-height:470px;
+    max-height:470px;
+  }
+}
+.card:hover, .gal-card:hover{
+  transform:translateY(-5px) !important;
+  box-shadow:0 18px 40px rgba(92,15,29,.2);
+  border-color:var(--gold);
+}
+.card.main{
+  background:linear-gradient(135deg,var(--maroon),var(--deep));
+  color:var(--cream);
+  border-color:var(--gold);
+}
 .card.main h3,.card.main .d b{color:var(--gold2)}
 .card.main .h-sub{color:var(--gold2);opacity:.95}
 .card.main .t{color:var(--gold2);opacity:.95}
 .card.main p{color:rgba(244,230,200,.95)}
-.card-thumb{width:100%;height:210px;min-height:210px;max-height:210px;position:relative;overflow:hidden;background:var(--deep);flex-shrink:0}
-.card-thumb img{width:100% !important;height:100% !important;object-fit:cover !important;display:block;transition:transform .8s ease}
-.card:hover .card-thumb img{transform:scale(1.08)}
-.card-body{padding:1.15rem 1.15rem 1.25rem;display:flex;flex-direction:column;flex:1;overflow:hidden}
-.card-header-row{display:flex;align-items:center;gap:1rem;margin-bottom:.75rem;padding-bottom:.75rem;border-bottom:1px solid rgba(212,168,75,.3);flex-shrink:0}
+
+/* image headers */
+.card-thumb, .gal-card-img-wrap{
+  width:100%;
+  height:220px;
+  min-height:220px;
+  max-height:220px;
+  position:relative;
+  overflow:hidden;
+  background:var(--deep);
+  flex-shrink:0;
+}
+.card-thumb img, .gal-card-img-wrap img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  display:block;
+  transition:transform .8s ease;
+}
+.card:hover .card-thumb img, .gal-card:hover .gal-card-img-wrap img{
+  transform:scale(1.08);
+}
+
+/* card bodies */
+.card-body, .gal-card-body{
+  padding:1.15rem 1.15rem 1.25rem;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  overflow:hidden;
+  text-align:left;
+}
+.card-header-row{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  margin-bottom:.75rem;
+  padding-bottom:.75rem;
+  border-bottom:1px solid rgba(212,168,75,.3);
+  flex-shrink:0;
+}
 .card.main .card-header-row{border-bottom-color:rgba(240,210,138,.35)}
 .d{min-width:58px;text-align:center;border-right:1px solid var(--gold);padding-right:.75rem;flex-shrink:0}
 .d b{display:block;font:600 1.8rem var(--serif);color:var(--maroon);line-height:1}
@@ -107,43 +179,38 @@ section{padding:clamp(3.5rem,9vw,6rem) 1.25rem;text-align:center;position:relati
 .card.main .h-sub{filter:none}
 .card .t{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--maroon2);font-weight:600}
 .card-desc{font-size:.83rem;line-height:1.55;color:#4a2c33;margin-top:.35rem;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
-.dress{margin-top:2rem;font-family:var(--serif);font-style:italic;color:var(--maroon);font-size:1.15rem}
-/* couple portrait */
-#portrait{background:var(--ivory);padding-top:0}
-.portrait-wrap{display:grid;gap:1.5rem;grid-template-columns:1fr;max-width:880px;margin:0 auto}
-@media(min-width:600px){.portrait-wrap{grid-template-columns:1fr 1fr}}
-.portrait-card{position:relative;border-radius:4px;overflow:hidden;border:1.5px solid var(--gold);aspect-ratio:3/4}
-.portrait-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease}
-.portrait-card:hover img{transform:scale(1.05)}
-.portrait-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(59,9,18,.85));padding:1.5rem 1rem .9rem;color:var(--gold2);font-family:var(--serif);font-size:1.3rem;font-style:italic;text-align:center}
-/* gallery */
+
+.gal-card-meta{
+  font-size:.68rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--maroon2);
+  font-weight:600;
+  margin-bottom:.25rem;
+}
+.gal-card-title{
+  font-family:var(--serif);
+  font-size:1.25rem;
+  color:var(--maroon);
+  line-height:1.25;
+  margin-bottom:.35rem;
+}
+.gal-card-desc{
+  font-size:.83rem;
+  line-height:1.55;
+  color:var(--ink);
+  opacity:.88;
+  font-weight:300;
+  display:-webkit-box;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+#events{background:var(--cream)}
+.dress{margin-top:2.5rem;font-family:var(--serif);font-size:1.05rem;font-style:italic;color:var(--gold)}
+
 #gallery{background:var(--ivory)}
-.gal-scroll{display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:.5rem 0 1.5rem;cursor:grab;scrollbar-width:none}
-.gal-scroll:active{cursor:grabbing}
-.gal-scroll::-webkit-scrollbar{display:none}
-.gal-card{flex:0 0 320px;width:320px;height:470px;min-height:470px;max-height:470px;scroll-snap-align:center;border-radius:6px;overflow:hidden;position:relative;border:1.5px solid rgba(212,168,75,.4);cursor:pointer;transition:transform .4s,border-color .3s,box-shadow .4s;box-sizing:border-box}
-@media(max-width:600px){.gal-card{flex:0 0 285px;width:285px;height:470px;min-height:470px;max-height:470px}}
-.gal-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 18px 40px rgba(59,9,18,.25)}
-.gal-card img{width:100% !important;height:100% !important;object-fit:cover !important;display:block;transition:transform .8s ease}
-.gal-card:hover img{transform:scale(1.06)}
-.gal-card-info{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,transparent 0%,rgba(30,5,10,.65) 25%,rgba(30,5,10,.95) 100%);padding:2rem 1.25rem 1.15rem;color:var(--cream);text-align:left}
-.gal-card-tag{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);font-weight:600;margin-bottom:.25rem;display:inline-block}
-.gal-card-title{font-family:var(--serif);font-size:1.35rem;color:#fff;line-height:1.2;margin-bottom:.35rem}
-.gal-card-desc{font-size:.82rem;line-height:1.5;color:rgba(251,243,226,.88);font-family:var(--sans);font-weight:300}
-.gal-hint{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--maroon2);opacity:.8;text-align:center;margin-top:.75rem}
-/* grid */
-.gal-grid{display:grid;gap:1.5rem;grid-template-columns:1fr;margin-top:3rem;max-width:960px;margin-left:auto;margin-right:auto}
-@media(min-width:600px){.gal-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:900px){.gal-grid{grid-template-columns:repeat(3,1fr)}}
-.gal-grid-card{background:#fff9ec;border:1.5px solid rgba(212,168,75,.4);border-radius:6px;overflow:hidden;cursor:pointer;transition:transform .4s,box-shadow .4s,border-color .3s;display:flex;flex-direction:column;height:100%}
-.gal-grid-card:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(59,9,18,.2);border-color:var(--gold)}
-.gal-grid-img-wrap{width:100%;height:220px;min-height:220px;max-height:220px;position:relative;overflow:hidden;background:var(--deep);flex-shrink:0}
-.gal-grid-img-wrap img{width:100% !important;height:100% !important;object-fit:cover !important;display:block;transition:transform .7s ease}
-.gal-grid-card:hover .gal-grid-img-wrap img{transform:scale(1.07)}
-.gal-grid-body{padding:1.1rem 1rem 1.2rem;text-align:left;flex:1;display:flex;flex-direction:column}
-.gal-grid-meta{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--maroon2);font-weight:600;margin-bottom:.25rem}
-.gal-grid-title{font-family:var(--serif);font-size:1.25rem;color:var(--maroon);line-height:1.25;margin-bottom:.35rem}
-.gal-grid-desc{font-size:.82rem;line-height:1.55;color:var(--ink);opacity:.88;font-weight:300}
 /* lightbox */
 #lb{position:fixed;inset:0;z-index:200;background:rgba(20,5,10,.95);display:none;align-items:center;justify-content:center;padding:1.5rem 1rem;flex-direction:column;gap:.9rem}
 #lb.open{display:flex}
@@ -235,15 +302,9 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
 <section id="events"><div class="wrap">
  <div class="tag rv">Wedding Celebrations</div><h2 class="h2 rv">The Sacred Rituals</h2><div class="orn">❖</div>
  
- <!-- Sacred Rituals Carousel Slider -->
+ <!-- Sacred Rituals Continuous Slider -->
  <div class="slider-wrap-box rv" id="evSliderContainer">
-  <button class="slider-nav-btn prev" id="evPrev" aria-label="Previous ritual">
-   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-  </button>
   <div class="ev-scroll" id="evList"></div>
-  <button class="slider-nav-btn next" id="evNext" aria-label="Next ritual">
-   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-  </button>
  </div>
  <div class="slider-dots" id="evDots"></div>
  <div class="slider-hint-text">← Swipe or drag across to explore the sacred rituals →</div>
@@ -256,155 +317,91 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
  <div class="tag rv">Cherished Moments</div>
  <h2 class="h2 rv deva">विवाह संस्मरण</h2>
  <div class="orn">❖</div>
- <p class="rv" style="font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--maroon);max-width:640px;margin:0 auto 2.5rem;line-height:1.6">
+ <p class="rv" style="font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--maroon);max-width:640px;margin:0 auto 1.5rem;line-height:1.6">
   A visual chronicle of sacred vows, quiet glances, radiant smiles, and eternal devotion along our journey of love.
  </p>
 
- <!-- Horizontal Photo Scroller with Descriptions -->
+ <!-- Horizontal Photo Slider with Image & Description -->
  <div class="slider-wrap-box rv" id="galSliderContainer">
-  <button class="slider-nav-btn prev" id="galPrev" aria-label="Previous moment">
-   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-  </button>
   <div class="gal-scroll" id="shubhGalScroll">
-  
-  <div class="gal-card" data-src="images/couple_editorial.jpg" data-title="Royal Reception Gala · राजसी रिसेप्शन" data-desc="Kasandra and Imanule celebrating their holy vows under cascading twilight crystal chandeliers in regal black-tie elegance.">
-   <img src="images/couple_editorial.jpg" alt="Royal Reception Gala" loading="lazy">
-   <div class="gal-card-info">
-    <span class="gal-card-tag">Celebration</span>
-    <h3 class="gal-card-title">Royal Reception Gala</h3>
-    <p class="gal-card-desc">Celebrating holy vows under cascading twilight crystal chandeliers in timeless black-tie elegance.</p>
+   
+   <div class="gal-card" data-src="images/couple_editorial.jpg" data-title="Gala Reception Elegance · राजसी रिसेप्शन" data-desc="Kasandra and Imanule celebrating in luxury black-tie attire under twilight crystal chandeliers with family and friends.">
+    <div class="gal-card-img-wrap"><img src="images/couple_editorial.jpg" alt="Royal Celebration" loading="lazy"></div>
+    <div class="gal-card-body">
+     <span class="gal-card-meta">Reception · प्रीतिभोज</span>
+     <h3 class="gal-card-title">Gala Reception Elegance</h3>
+     <p class="gal-card-desc">Kasandra and Imanule celebrating in luxury black-tie attire under twilight chandeliers with family and friends.</p>
+    </div>
    </div>
-  </div>
 
-  <div class="gal-card" data-src="images/couple_sunlight.jpg" data-title="Golden Hour Embrace · स्वर्णिम आलिंगन" data-desc="An intimate and tender forehead embrace kissed by radiant afternoon sunbeams as two souls merge into one.">
-   <img src="images/couple_sunlight.jpg" alt="Golden Hour Embrace" loading="lazy">
-   <div class="gal-card-info">
-    <span class="gal-card-tag">Moments</span>
-    <h3 class="gal-card-title">Golden Hour Embrace</h3>
-    <p class="gal-card-desc">An intimate and tender forehead embrace kissed by radiant afternoon sunbeams as two souls unite.</p>
+   <div class="gal-card" data-src="images/couple_sunlight.jpg" data-title="Golden Hour Embrace · स्वर्णिम आलिंगन" data-desc="Intimate golden hour forehead embrace with radiant sunlight flare as two souls unite in lifelong devotion.">
+    <div class="gal-card-img-wrap"><img src="images/couple_sunlight.jpg" alt="Golden Hour Romance" loading="lazy"></div>
+    <div class="gal-card-body">
+     <span class="gal-card-meta">Romance · प्रेम</span>
+     <h3 class="gal-card-title">Golden Hour Embrace</h3>
+     <p class="gal-card-desc">Intimate golden hour forehead embrace with radiant sunlight flare as two souls unite in lifelong devotion.</p>
+    </div>
    </div>
-  </div>
 
-  <div class="gal-card" data-src="images/mandap_ceremony.jpg" data-title="Sacred Mandap Pheras · पवित्र सात फेरे" data-desc="Taking the seven eternal steps around the holy fire in royal maroon sherwani and bridal crimson lehenga.">
-   <img src="images/mandap_ceremony.jpg" alt="Sacred Mandap Pheras" loading="lazy">
-   <div class="gal-card-info">
-    <span class="gal-card-tag">The Rituals</span>
-    <h3 class="gal-card-title">Sacred Mandap Pheras</h3>
-    <p class="gal-card-desc">Taking the seven eternal steps around the holy fire in royal maroon sherwani and bridal red lehenga.</p>
+   <div class="gal-card" data-src="images/mandap_ceremony.jpg" data-title="Sacred Mandap Ceremony · पवित्र सात फेरे" data-desc="Sacred Mandap pheras and Vedic blessings in royal maroon sherwani and bridal red lehenga around holy Agni.">
+    <div class="gal-card-img-wrap"><img src="images/mandap_ceremony.jpg" alt="Sacred Mandap Ceremony" loading="lazy"></div>
+    <div class="gal-card-body">
+     <span class="gal-card-meta">Vows · सात फेरे</span>
+     <h3 class="gal-card-title">Sacred Mandap Pheras</h3>
+     <p class="gal-card-desc">Sacred Mandap pheras and Vedic blessings in royal maroon sherwani and bridal red lehenga around holy Agni.</p>
+    </div>
    </div>
-  </div>
 
-  <div class="gal-card" data-src="images/wedding_hands.jpg" data-title="Bridal Mehendi &amp; Chooda · मेहंदी एवं चूड़ा" data-desc="Intricate henna designs, traditional red chooda bangles, and sacred floral garlands joined in timeless devotion.">
-   <img src="images/wedding_hands.jpg" alt="Bridal Mehendi &amp; Chooda" loading="lazy">
-   <div class="gal-card-info">
-    <span class="gal-card-tag">Devotion</span>
-    <h3 class="gal-card-title">Bridal Mehendi &amp; Chooda</h3>
-    <p class="gal-card-desc">Intricate henna designs, red chooda bangles, and sacred floral garlands joined in timeless devotion.</p>
+   <div class="gal-card" data-src="images/wedding_hands.jpg" data-title="Bridal Mehendi &amp; Chooda · मेहंदी एवं चूड़ा" data-desc="Sacred bridal mehendi, auspicious red chooda bangles, and floral garlands joined in eternal devotion.">
+    <div class="gal-card-img-wrap"><img src="images/wedding_hands.jpg" alt="Bridal Mehendi" loading="lazy"></div>
+    <div class="gal-card-body">
+     <span class="gal-card-meta">Henna · मेहंदी</span>
+     <h3 class="gal-card-title">Bridal Mehendi &amp; Chooda</h3>
+     <p class="gal-card-desc">Sacred bridal mehendi, auspicious red chooda bangles, and floral garlands joined in eternal devotion.</p>
+    </div>
    </div>
-  </div>
 
-  <div class="gal-card" data-src="images/gallery_veil.jpg" data-title="Lace Veil Reflections · घूंघट के साये में" data-desc="A serene and sacred portrait of the bride bathed in soft natural light beneath her delicate embroidered lace veil.">
-   <img src="images/gallery_veil.jpg" alt="Lace Veil Reflections" loading="lazy">
-   <div class="gal-card-info">
-    <span class="gal-card-tag">The Bride</span>
-    <h3 class="gal-card-title">Lace Veil Reflections</h3>
-    <p class="gal-card-desc">A serene and sacred portrait of the bride bathed in soft natural light beneath her embroidered lace veil.</p>
+   <div class="gal-card" data-src="images/gallery_veil.jpg" data-title="Lace Veil Reflections · घूंघट के साये में" data-desc="A serene and sacred portrait of the bride bathed in soft natural light beneath her delicate embroidered lace veil.">
+    <div class="gal-card-img-wrap"><img src="images/gallery_veil.jpg" alt="Lace Veil Reflections" loading="lazy"></div>
+    <div class="gal-card-body">
+     <span class="gal-card-meta">The Bride · घूंघट</span>
+     <h3 class="gal-card-title">Lace Veil Reflections</h3>
+     <p class="gal-card-desc">A serene and sacred portrait of the bride bathed in soft natural light beneath her delicate embroidered lace veil.</p>
+    </div>
    </div>
-  </div>
 
-  <div class="gal-card" data-src="images/gallery_rings.jpg" data-title="The Covenant of Rings · अंगूठी की रस्म" data-desc="Custom crafted gold wedding bands inscribed with everlasting promises of love, faith, and mutual honor.">
-   <img src="images/gallery_rings.jpg" alt="The Covenant of Rings" loading="lazy">
-   <div class="gal-card-info">
-    <span class="gal-card-tag">Eternity</span>
-    <h3 class="gal-card-title">The Covenant of Rings</h3>
-    <p class="gal-card-desc">Custom crafted gold wedding bands inscribed with everlasting promises of love, faith, and honor.</p>
+   <div class="gal-card" data-src="images/gallery_rings.jpg" data-title="The Rings of Eternity · पवित्र अंगूठियां" data-desc="The sacred covenant of eternity - Custom gold wedding bands crafted with timeless symbols of devotion.">
+    <div class="gal-card-img-wrap"><img src="images/gallery_rings.jpg" alt="Sacred Rings" loading="lazy"></div>
+    <div class="gal-card-body">
+     <span class="gal-card-meta">Promise · वचन</span>
+     <h3 class="gal-card-title">The Rings of Eternity</h3>
+     <p class="gal-card-desc">The sacred covenant of eternity - Custom gold wedding bands crafted with timeless symbols of devotion.</p>
+    </div>
    </div>
-  </div>
 
-  <div class="gal-card" data-src="images/gallery_cheers.jpg" data-title="A Toast to Joy · खुशियों का जाम" data-desc="Raising fine crystal champagne flutes surrounded by cherished family and dearest friends to lifelong happiness.">
-   <img src="images/gallery_cheers.jpg" alt="Celebration Toast" loading="lazy">
-   <div class="gal-card-info">
-    <span class="gal-card-tag">Celebration</span>
-    <h3 class="gal-card-title">A Toast to Joy</h3>
-    <p class="gal-card-desc">Raising crystal champagne flutes surrounded by cherished family and friends to lifelong happiness.</p>
+   <div class="gal-card" data-src="images/gallery_cheers.jpg" data-title="Celebration Toast · शुभकामना एवं आनंद" data-desc="Champagne flutes raised in joyous celebration with beloved family and guests toast to eternal happiness.">
+    <div class="gal-card-img-wrap"><img src="images/gallery_cheers.jpg" alt="Celebration Toast" loading="lazy"></div>
+    <div class="gal-card-body">
+     <span class="gal-card-meta">Celebration · बधाई</span>
+     <h3 class="gal-card-title">A Toast to Joy</h3>
+     <p class="gal-card-desc">Champagne flutes raised in joyous celebration with beloved family and guests to toast to eternal happiness.</p>
+    </div>
    </div>
-  </div>
 
-  <div class="gal-card" data-src="images/gallery_cake.jpg" data-title="Artisanal Wedding Cake · मिष्ठान्न एवं आनंद" data-desc="Tiered artisanal vanilla bean wedding cake accented with handpicked garden florals and berries.">
-   <img src="images/gallery_cake.jpg" alt="Artisanal Wedding Cake" loading="lazy">
-   <div class="gal-card-info">
-    <span class="gal-card-tag">Sweet Beginnings</span>
-    <h3 class="gal-card-title">Artisanal Wedding Cake</h3>
-    <p class="gal-card-desc">Tiered artisanal vanilla bean wedding cake accented with handpicked garden florals and fresh berries.</p>
+   <div class="gal-card" data-src="images/gallery_cake.jpg" data-title="Artisanal Wedding Cake · मधुर शुरुआत" data-desc="Artisanal vanilla bean wedding cake decorated with fresh garden flora and berries for our sweet beginning.">
+    <div class="gal-card-img-wrap"><img src="images/gallery_cake.jpg" alt="Wedding Cake" loading="lazy"></div>
+    <div class="gal-card-body">
+     <span class="gal-card-meta">Tradition · मिष्ठान्न</span>
+     <h3 class="gal-card-title">Artisanal Wedding Cake</h3>
+     <p class="gal-card-desc">Artisanal vanilla bean wedding cake decorated with fresh garden flora and berries for our sweet beginning.</p>
+    </div>
    </div>
-  </div>
 
- </div>
-  <button class="slider-nav-btn next" id="galNext" aria-label="Next moment">
-   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-  </button>
+  </div>
  </div>
  <div class="slider-dots" id="galDots"></div>
  <div class="slider-hint-text">← Swipe or drag across to explore our journey →</div>
 
- <!-- Gallery Grid with Narrative Descriptions -->
- <div class="gal-grid rv">
-  
-  <div class="gal-grid-card" data-src="images/couple_editorial.jpg" data-title="Gala Reception Elegance · राजसी रिसेप्शन" data-desc="Kasandra and Imanule celebrating in luxury black-tie attire under twilight crystal chandeliers.">
-   <div class="gal-grid-img-wrap"><img src="images/couple_editorial.jpg" alt="Royal Celebration" loading="lazy"></div>
-   <div class="gal-grid-body">
-    <span class="gal-grid-meta">Reception · प्रीतिभोज</span>
-    <h4 class="gal-grid-title">Gala Reception Elegance</h4>
-    <p class="gal-grid-desc">Kasandra and Imanule celebrating in luxury black-tie attire under twilight chandeliers with family and friends.</p>
-   </div>
-  </div>
-
-  <div class="gal-grid-card" data-src="images/couple_sunlight.jpg" data-title="Golden Hour Embrace · स्वर्णिम आलिंगन" data-desc="Intimate golden hour forehead embrace with radiant sunlight flare as two souls unite in lifelong devotion.">
-   <div class="gal-grid-img-wrap"><img src="images/couple_sunlight.jpg" alt="Golden Hour Romance" loading="lazy"></div>
-   <div class="gal-grid-body">
-    <span class="gal-grid-meta">Romance · प्रेम</span>
-    <h4 class="gal-grid-title">Golden Hour Embrace</h4>
-    <p class="gal-grid-desc">Intimate golden hour forehead embrace with radiant sunlight flare as two souls unite in lifelong devotion.</p>
-   </div>
-  </div>
-
-  <div class="gal-grid-card" data-src="images/mandap_ceremony.jpg" data-title="Sacred Mandap Ceremony · पवित्र सात फेरे" data-desc="Sacred Mandap pheras and Vedic blessings in royal maroon sherwani and bridal red lehenga.">
-   <div class="gal-grid-img-wrap"><img src="images/mandap_ceremony.jpg" alt="Sacred Mandap Ceremony" loading="lazy"></div>
-   <div class="gal-grid-body">
-    <span class="gal-grid-meta">Vows · सात फेरे</span>
-    <h4 class="gal-grid-title">Sacred Mandap Pheras</h4>
-    <p class="gal-grid-desc">Sacred Mandap pheras and Vedic blessings in royal maroon sherwani and bridal red lehenga around holy Agni.</p>
-   </div>
-  </div>
-
-  <div class="gal-grid-card" data-src="images/wedding_hands.jpg" data-title="Bridal Mehendi &amp; Chooda · मेहंदी एवं चूड़ा" data-desc="Sacred bridal mehendi, auspicious red chooda bangles, and floral garlands joined in eternal devotion.">
-   <div class="gal-grid-img-wrap"><img src="images/wedding_hands.jpg" alt="Bridal Mehendi" loading="lazy"></div>
-   <div class="gal-grid-body">
-    <span class="gal-grid-meta">Henna · मेहंदी</span>
-    <h4 class="gal-grid-title">Bridal Mehendi &amp; Chooda</h4>
-    <p class="gal-grid-desc">Sacred bridal mehendi, auspicious red chooda bangles, and floral garlands joined in eternal devotion.</p>
-   </div>
-  </div>
-
-  <div class="gal-grid-card" data-src="images/gallery_rings.jpg" data-title="The Rings of Eternity · पवित्र अंगूठियां" data-desc="The sacred covenant of eternity - Custom gold wedding bands crafted with timeless symbols of devotion.">
-   <div class="gal-grid-img-wrap"><img src="images/gallery_rings.jpg" alt="Sacred Rings" loading="lazy"></div>
-   <div class="gal-grid-body">
-    <span class="gal-grid-meta">Promise · वचन</span>
-    <h4 class="gal-grid-title">The Rings of Eternity</h4>
-    <p class="gal-grid-desc">The sacred covenant of eternity - Custom gold wedding bands crafted with timeless symbols of devotion.</p>
-   </div>
-  </div>
-
-  <div class="gal-grid-card" data-src="images/gallery_cake.jpg" data-title="Artisanal Wedding Cake · मधुर शुरुआत" data-desc="Artisanal vanilla bean wedding cake decorated with fresh garden flora and berries for our sweet beginning.">
-   <div class="gal-grid-img-wrap"><img src="images/gallery_cake.jpg" alt="Wedding Cake" loading="lazy"></div>
-   <div class="gal-grid-body">
-    <span class="gal-grid-meta">Tradition · मिष्ठान्न</span>
-    <h4 class="gal-grid-title">Artisanal Wedding Cake</h4>
-    <p class="gal-grid-desc">Artisanal vanilla bean wedding cake decorated with fresh garden flora and berries for our sweet beginning.</p>
-   </div>
-  </div>
-
- </div>
 </div></section>
 
 
