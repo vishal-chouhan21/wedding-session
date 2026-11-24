@@ -60,31 +60,53 @@ section{padding:clamp(3.5rem,9vw,6rem) 1.25rem;text-align:center;position:relati
 .fam div{background:#fff9ec;border:1px solid var(--gold);padding:1.5rem 1rem;border-radius:4px}
 .fam h3{color:var(--maroon);font-size:1.6rem}.fam .tag{display:block;margin-bottom:.3rem}
 
-/* events */
+/* shared slider navigation & controls */
+.ev-scroll .card, .gal-scroll .gal-card {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+.slider-wrap-box{position:relative;max-width:1160px;margin:2rem auto 0;padding:0 3.2rem}
+@media(max-width:768px){.slider-wrap-box{padding:0 1rem}}
+.slider-nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:var(--maroon);color:var(--gold2);border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;box-shadow:0 8px 24px rgba(59,9,18,.35);transition:all .3s cubic-bezier(0.16,1,0.3,1)}
+.slider-nav-btn:hover{background:var(--gold);color:var(--deep);transform:translateY(-50%) scale(1.1);box-shadow:0 12px 30px rgba(212,168,75,.45)}
+.slider-nav-btn.prev{left:0}
+.slider-nav-btn.next{right:0}
+@media(max-width:768px){.slider-nav-btn{display:none}}
+.slider-dots{display:flex;justify-content:center;align-items:center;gap:.5rem;margin-top:1.25rem;margin-bottom:.35rem}
+.slider-dot{width:8px;height:8px;border-radius:50%;background:rgba(212,168,75,.3);border:1px solid var(--gold);cursor:pointer;transition:all .3s ease}
+.slider-dot.active{width:24px;border-radius:12px;background:var(--gold)}
+.slider-hint-text{text-align:center;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);opacity:.9;margin-top:.4rem;margin-bottom:1.5rem;font-family:var(--sans)}
+
+/* events slider */
 #events{background:var(--cream)}
-.ev{display:grid;gap:1.5rem;margin-top:2.5rem;text-align:left;max-width:960px;margin-left:auto;margin-right:auto;grid-template-columns:1fr}
-@media(min-width:680px){.ev{grid-template-columns:repeat(2,1fr)}}
-.card{display:flex;flex-direction:column;height:100%;background:var(--ivory);border:1.5px solid var(--gold);border-radius:6px;overflow:hidden;position:relative;transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s ease,border-color .3s}
+.ev-scroll{display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:.5rem .25rem 1.25rem;cursor:grab;scrollbar-width:none;text-align:left}
+.ev-scroll:active{cursor:grabbing}
+.ev-scroll::-webkit-scrollbar{display:none}
+
+.card{flex:0 0 320px;width:320px;height:470px;min-height:470px;max-height:470px;scroll-snap-align:center;display:flex;flex-direction:column;background:var(--ivory);border:1.5px solid var(--gold);border-radius:6px;overflow:hidden;position:relative;transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s ease,border-color .3s;box-sizing:border-box}
+@media(max-width:600px){.card{flex:0 0 285px;width:285px;height:470px;min-height:470px;max-height:470px}}
 .card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(92,15,29,.2);border-color:var(--gold2)}
 .card.main{background:linear-gradient(135deg,var(--maroon),var(--deep));color:var(--cream);border-color:var(--gold)}
 .card.main h3,.card.main .d b{color:var(--gold2)}
 .card.main .h-sub{color:var(--gold2);opacity:.95}
 .card.main .t{color:var(--gold2);opacity:.95}
 .card.main p{color:rgba(244,230,200,.95)}
-.card-thumb{width:100%;height:220px;min-height:220px;max-height:220px;position:relative;overflow:hidden;background:var(--deep);flex-shrink:0}
-.card-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease}
+.card-thumb{width:100%;height:210px;min-height:210px;max-height:210px;position:relative;overflow:hidden;background:var(--deep);flex-shrink:0}
+.card-thumb img{width:100% !important;height:100% !important;object-fit:cover !important;display:block;transition:transform .8s ease}
 .card:hover .card-thumb img{transform:scale(1.08)}
-.card-body{padding:1.25rem 1.15rem 1.4rem;display:flex;flex-direction:column;flex:1}
-.card-header-row{display:flex;align-items:center;gap:1rem;margin-bottom:.85rem;padding-bottom:.85rem;border-bottom:1px solid rgba(212,168,75,.3)}
+.card-body{padding:1.15rem 1.15rem 1.25rem;display:flex;flex-direction:column;flex:1;overflow:hidden}
+.card-header-row{display:flex;align-items:center;gap:1rem;margin-bottom:.75rem;padding-bottom:.75rem;border-bottom:1px solid rgba(212,168,75,.3);flex-shrink:0}
 .card.main .card-header-row{border-bottom-color:rgba(240,210,138,.35)}
-.d{min-width:62px;text-align:center;border-right:1px solid var(--gold);padding-right:.85rem;flex-shrink:0}
-.d b{display:block;font:600 1.9rem var(--serif);color:var(--maroon);line-height:1}.d span{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase}
-.card-heading-box{flex:1}
-.card h3{font-size:1.35rem;color:var(--maroon);line-height:1.2;font-family:var(--serif);margin-bottom:.15rem}
-.h-sub{font-size:.9rem;color:var(--gold);font-family:var(--deva);filter:brightness(.85);margin-bottom:.2rem}
+.d{min-width:58px;text-align:center;border-right:1px solid var(--gold);padding-right:.75rem;flex-shrink:0}
+.d b{display:block;font:600 1.8rem var(--serif);color:var(--maroon);line-height:1}
+.d span{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase}
+.card-heading-box{flex:1;min-width:0}
+.card h3{font-size:1.25rem;color:var(--maroon);line-height:1.2;font-family:var(--serif);margin-bottom:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.h-sub{font-size:.88rem;color:var(--gold);font-family:var(--deva);filter:brightness(.85);margin-bottom:.2rem}
 .card.main .h-sub{filter:none}
-.card .t{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--maroon2);font-weight:600}
-.card-desc{font-size:.9rem;line-height:1.6;margin-top:auto}
+.card .t{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--maroon2);font-weight:600}
+.card-desc{font-size:.83rem;line-height:1.55;color:#4a2c33;margin-top:.35rem;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .dress{margin-top:2rem;font-family:var(--serif);font-style:italic;color:var(--maroon);font-size:1.15rem}
 /* couple portrait */
 #portrait{background:var(--ivory);padding-top:0}
@@ -99,8 +121,8 @@ section{padding:clamp(3.5rem,9vw,6rem) 1.25rem;text-align:center;position:relati
 .gal-scroll{display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:.5rem 0 1.5rem;cursor:grab;scrollbar-width:none}
 .gal-scroll:active{cursor:grabbing}
 .gal-scroll::-webkit-scrollbar{display:none}
-.gal-card{flex:0 0 320px;width:320px;height:440px;min-height:440px;max-height:440px;scroll-snap-align:center;border-radius:6px;overflow:hidden;position:relative;border:1.5px solid rgba(212,168,75,.4);cursor:pointer;transition:transform .4s,border-color .3s,box-shadow .4s}
-@media(max-width:600px){.gal-card{flex:0 0 280px;width:280px;height:400px;min-height:400px;max-height:400px}}
+.gal-card{flex:0 0 320px;width:320px;height:470px;min-height:470px;max-height:470px;scroll-snap-align:center;border-radius:6px;overflow:hidden;position:relative;border:1.5px solid rgba(212,168,75,.4);cursor:pointer;transition:transform .4s,border-color .3s,box-shadow .4s;box-sizing:border-box}
+@media(max-width:600px){.gal-card{flex:0 0 285px;width:285px;height:470px;min-height:470px;max-height:470px}}
 .gal-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 18px 40px rgba(59,9,18,.25)}
 .gal-card img{width:100% !important;height:100% !important;object-fit:cover !important;display:block;transition:transform .8s ease}
 .gal-card:hover img{transform:scale(1.06)}
@@ -212,7 +234,20 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
 
 <section id="events"><div class="wrap">
  <div class="tag rv">Wedding Celebrations</div><h2 class="h2 rv">The Sacred Rituals</h2><div class="orn">❖</div>
- <div class="ev" id="evList"></div>
+ 
+ <!-- Sacred Rituals Carousel Slider -->
+ <div class="slider-wrap-box rv" id="evSliderContainer">
+  <button class="slider-nav-btn prev" id="evPrev" aria-label="Previous ritual">
+   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+  </button>
+  <div class="ev-scroll" id="evList"></div>
+  <button class="slider-nav-btn next" id="evNext" aria-label="Next ritual">
+   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+  </button>
+ </div>
+ <div class="slider-dots" id="evDots"></div>
+ <div class="slider-hint-text">← Swipe or drag across to explore the sacred rituals →</div>
+
  <p class="dress rv">Traditional Indian attire is warmly encouraged.</p>
 </div></section>
 
@@ -226,7 +261,11 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
  </p>
 
  <!-- Horizontal Photo Scroller with Descriptions -->
- <div class="gal-scroll rv" id="shubhGalScroll">
+ <div class="slider-wrap-box rv" id="galSliderContainer">
+  <button class="slider-nav-btn prev" id="galPrev" aria-label="Previous moment">
+   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+  </button>
+  <div class="gal-scroll" id="shubhGalScroll">
   
   <div class="gal-card" data-src="images/couple_editorial.jpg" data-title="Royal Reception Gala · राजसी रिसेप्शन" data-desc="Kasandra and Imanule celebrating their holy vows under cascading twilight crystal chandeliers in regal black-tie elegance.">
    <img src="images/couple_editorial.jpg" alt="Royal Reception Gala" loading="lazy">
@@ -301,7 +340,12 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
   </div>
 
  </div>
- <div class="gal-hint">← Swipe or drag across to explore our journey →</div>
+  <button class="slider-nav-btn next" id="galNext" aria-label="Next moment">
+   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+  </button>
+ </div>
+ <div class="slider-dots" id="galDots"></div>
+ <div class="slider-hint-text">← Swipe or drag across to explore our journey →</div>
 
  <!-- Gallery Grid with Narrative Descriptions -->
  <div class="gal-grid rv">
@@ -496,13 +540,111 @@ document.querySelectorAll('.gal-card, .gal-grid-card').forEach(function(el){
   openLb(src, title, desc);
  });
 });
-/* drag to scroll */
-var gScroll = document.getElementById('shubhGalScroll');
-if(gScroll){
- var isD=false, sX=0, sL=0;
- gScroll.onmousedown = function(e){ isD=true; sX=e.pageX-gScroll.offsetLeft; sL=gScroll.scrollLeft; };
- gScroll.onmouseleave = function(){ isD=false; };
- gScroll.onmouseup = function(){ isD=false; };
- gScroll.onmousemove = function(e){ if(!isD) return; e.preventDefault(); gScroll.scrollLeft = sL - (e.pageX-gScroll.offsetLeft - sX)*1.5; };
+/* generic interactive slider controller */
+function initInteractiveSlider(scrollId, prevId, nextId, dotsId, cardClass) {
+  var scroller = document.getElementById(scrollId);
+  if(!scroller) return;
+  var prevBtn = document.getElementById(prevId);
+  var nextBtn = document.getElementById(nextId);
+  var dotsContainer = document.getElementById(dotsId);
+
+  var cards = scroller.getElementsByClassName(cardClass);
+
+  // Setup dots
+  if(dotsContainer && cards.length > 0) {
+    dotsContainer.innerHTML = '';
+    for(var i = 0; i < cards.length; i++) {
+      var dot = document.createElement('span');
+      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+      (function(idx){
+        dot.onclick = function() {
+          var targetCard = cards[idx];
+          if(targetCard) {
+            var targetLeft = targetCard.offsetLeft - scroller.offsetLeft - 8;
+            scroller.scrollTo({ left: targetLeft, behavior: 'smooth' });
+          }
+        };
+      })(i);
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  // Update active dot on scroll
+  function updateActiveDot() {
+    if(!dotsContainer || cards.length === 0) return;
+    var dots = dotsContainer.querySelectorAll('.slider-dot');
+    var centerPos = scroller.scrollLeft + scroller.clientWidth / 2;
+    var closestIdx = 0;
+    var minDiff = 999999;
+    for(var i = 0; i < cards.length; i++) {
+      var c = cards[i];
+      var cCenter = (c.offsetLeft - scroller.offsetLeft) + c.clientWidth / 2;
+      var diff = Math.abs(centerPos - cCenter);
+      if(diff < minDiff) {
+        minDiff = diff;
+        closestIdx = i;
+      }
+    }
+    for(var j = 0; j < dots.length; j++) {
+      dots[j].className = 'slider-dot' + (j === closestIdx ? ' active' : '');
+    }
+  }
+
+  scroller.addEventListener('scroll', updateActiveDot, { passive: true });
+
+  // Arrow button handlers
+  if(prevBtn) {
+    prevBtn.onclick = function() {
+      var step = cards[0] ? cards[0].offsetWidth + 20 : 340;
+      scroller.scrollBy({ left: -step, behavior: 'smooth' });
+    };
+  }
+  if(nextBtn) {
+    nextBtn.onclick = function() {
+      var step = cards[0] ? cards[0].offsetWidth + 20 : 340;
+      scroller.scrollBy({ left: step, behavior: 'smooth' });
+    };
+  }
+
+  // Smooth mouse drag on desktop
+  var isDragging = false, startX = 0, startScroll = 0, moved = false;
+  scroller.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    moved = false;
+    startX = e.pageX - scroller.offsetLeft;
+    startScroll = scroller.scrollLeft;
+  });
+  window.addEventListener('mouseup', function() {
+    isDragging = false;
+  });
+  scroller.addEventListener('mouseleave', function() {
+    isDragging = false;
+  });
+  scroller.addEventListener('mousemove', function(e) {
+    if(!isDragging) return;
+    e.preventDefault();
+    var curX = e.pageX - scroller.offsetLeft;
+    var walk = (curX - startX) * 1.5;
+    if(Math.abs(walk) > 5) moved = true;
+    scroller.scrollLeft = startScroll - walk;
+  });
+
+  // Prevent false lightbox click when dragging
+  if(cardClass === 'gal-card') {
+    for(var k = 0; k < cards.length; k++) {
+      cards[k].addEventListener('click', function(ev) {
+        if(moved) {
+          ev.preventDefault();
+          ev.stopPropagation();
+        }
+      }, true);
+    }
+  }
 }
+
+// Initialize Sacred Rituals Slider
+initInteractiveSlider('evList', 'evPrev', 'evNext', 'evDots', 'card');
+
+// Initialize Cherished Moments Gallery Slider
+initInteractiveSlider('shubhGalScroll', 'galPrev', 'galNext', 'galDots', 'gal-card');
 </script></body></html>
