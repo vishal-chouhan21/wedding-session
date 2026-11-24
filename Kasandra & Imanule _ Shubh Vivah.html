@@ -171,159 +171,8 @@ section{padding:clamp(3.5rem,9vw,6rem) 1.25rem;text-align:center;position:relati
   text-shadow:0 1px 4px rgba(0,0,0,.7);
 }
 
-
-/* bride & groom side-by-side grid (no slider) */
-#portrait{background:var(--cream);padding:4.5rem 1.25rem}
-.portrait-intro{font-family:var(--serif);font-size:1.15rem;font-style:italic;color:var(--maroon);max-width:620px;margin:0 auto 2rem;line-height:1.6;text-align:center}
-.portrait-grid{
-  display:grid;
-  grid-template-columns:repeat(2, 1fr);
-  gap:1.75rem;
-  max-width:880px;
-  margin:0 auto;
-}
-@media(max-width:640px){
-  .portrait-grid{
-    grid-template-columns:repeat(2, 1fr);
-    gap:0.75rem;
-  }
-}
-.portrait-card{
-  background:#fffbf2;
-  border:1.5px solid var(--gold);
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 14px 35px rgba(92,15,29,.12);
-  display:flex;
-  flex-direction:column;
-  transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s ease,border-color .3s;
-}
-.portrait-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 20px 45px rgba(92,15,29,.2);
-  border-color:var(--gold2);
-}
-.portrait-img-box{
-  position:relative;
-  width:100%;
-  height:380px;
-  overflow:hidden;
-  background:var(--deep);
-  flex-shrink:0;
-}
-@media(max-width:640px){
-  .portrait-img-box{
-    height:220px;
-  }
-}
-@media(max-width:400px){
-  .portrait-img-box{
-    height:180px;
-  }
-}
-.portrait-img-box img{
-  width:100% !important;
-  height:100% !important;
-  object-fit:cover !important;
-  object-position:center 15% !important;
-  display:block;
-  transition:transform .8s ease;
-}
-.portrait-card:hover .portrait-img-box img{
-  transform:scale(1.06);
-}
-.portrait-badge{
-  position:absolute;
-  top:.85rem;
-  left:.85rem;
-  z-index:2;
-  background:rgba(59,9,18,.88);
-  backdrop-filter:blur(6px);
-  -webkit-backdrop-filter:blur(6px);
-  color:var(--gold2);
-  border:1px solid var(--gold);
-  padding:.3rem .75rem;
-  border-radius:30px;
-  font-size:.65rem;
-  font-weight:600;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-}
-@media(max-width:640px){
-  .portrait-badge{
-    top:.5rem;
-    left:.5rem;
-    padding:.2rem .5rem;
-    font-size:.58rem;
-    letter-spacing:.05em;
-  }
-}
-.portrait-details{
-  padding:1.25rem 1rem 1.4rem;
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  flex:1;
-  background:#fffbf2;
-}
-@media(max-width:640px){
-  .portrait-details{
-    padding:.85rem .5rem 1rem;
-  }
-}
-.portrait-name{
-  font-family:var(--serif);
-  font-size:1.45rem;
-  font-weight:600;
-  color:var(--maroon);
-  line-height:1.2;
-  margin-bottom:.2rem;
-}
-@media(max-width:640px){
-  .portrait-name{
-    font-size:1.05rem;
-  }
-}
-.portrait-sanskrit{
-  font-size:.88rem;
-  color:var(--gold);
-  font-weight:600;
-  margin-bottom:.25rem;
-}
-@media(max-width:640px){
-  .portrait-sanskrit{
-    font-size:.75rem;
-    margin-bottom:.15rem;
-  }
-}
-.portrait-role{
-  font-size:.68rem;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  color:var(--maroon2);
-  font-weight:600;
-}
-@media(max-width:640px){
-  .portrait-role{
-    font-size:.6rem;
-  }
-}
-.portrait-quote{
-  font-family:var(--serif);
-  font-size:.88rem;
-  font-style:italic;
-  color:#55343d;
-  line-height:1.5;
-  margin-top:.6rem;
-  max-width:280px;
-}
-@media(max-width:640px){
-  .portrait-quote{
-    display:none;
-  }
-}
-
+#portrait{background:var(--cream);padding:5rem 1.5rem}
+.portrait-intro{font-family:var(--serif);font-size:1.18rem;font-style:italic;color:var(--maroon);max-width:620px;margin:0 auto 1.5rem;line-height:1.6;text-align:center}
 /* shared slider navigation & controls */
 .slider-wrap-box{position:relative;max-width:1160px;margin:1.8rem auto 0;padding:0;overflow:hidden}
 .slider-nav-btn{display:none !important}
@@ -491,23 +340,378 @@ section{padding:clamp(3.5rem,9vw,6rem) 1.25rem;text-align:center;position:relati
 .cd{display:flex;justify-content:center;gap:clamp(.5rem,2.5vw,1.4rem);margin:2rem 0}
 .cd div{min-width:68px;border:1px solid var(--gold);padding:1rem .4rem;border-radius:4px;background:rgba(0,0,0,.2)}
 .cd b{display:block;font:500 clamp(1.8rem,7vw,3rem) var(--serif);color:#fff;line-height:1}.cd span{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase}
-/* venue showcase */
-#venue{background:var(--ivory)}
-.venue-showcase{display:grid;gap:1.5rem;grid-template-columns:1fr;max-width:960px;margin:2.5rem auto 0;text-align:left}
-@media(min-width:768px){.venue-showcase{grid-template-columns:repeat(2,1fr)}}
-.venue-card{background:#fff9ec;border:1.5px solid var(--gold);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;height:100%;transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s ease,border-color .3s}
-.venue-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(92,15,29,.2);border-color:var(--gold2)}
-.venue-media{width:100%;height:240px;min-height:240px;max-height:240px;position:relative;overflow:hidden;background:var(--deep);flex-shrink:0}
-.venue-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease}
-.venue-card:hover .venue-media img{transform:scale(1.06)}
-.venue-media iframe{width:100%;height:100%;border:0;display:block}
-.venue-badge{position:absolute;top:.85rem;left:.85rem;background:rgba(59,9,18,.85);color:var(--gold2);padding:.35rem .75rem;border-radius:20px;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;backdrop-filter:blur(4px);border:1px solid rgba(212,168,75,.4)}
-.venue-badge.map-badge{background:rgba(20,40,20,.88);color:#d4f5d4;border-color:rgba(100,200,100,.45)}
-.venue-details{padding:1.4rem 1.25rem 1.5rem;display:flex;flex-direction:column;flex:1}
-.venue-details h3{font-size:1.6rem;color:var(--maroon);font-family:var(--serif);line-height:1.2;margin-bottom:.15rem}
-.venue-sub{font-size:.9rem;color:var(--gold);margin-bottom:.6rem;filter:brightness(.85)}
-.venue-addr{font-size:.92rem;line-height:1.6;color:var(--ink);opacity:.9;margin-bottom:1.4rem;flex:1}
-.venue-details .btns{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:auto}
+/* bride & groom side-by-side grid (no slider) */
+#portrait{background:var(--cream);padding:4.5rem 1.25rem}
+.portrait-intro{font-family:var(--serif);font-size:1.15rem;font-style:italic;color:var(--maroon);max-width:620px;margin:0 auto 2rem;line-height:1.6;text-align:center}
+.portrait-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:1.75rem;
+  max-width:880px;
+  margin:0 auto;
+}
+@media(max-width:640px){
+  .portrait-grid{
+    grid-template-columns:repeat(2, 1fr);
+    gap:0.75rem;
+  }
+}
+.portrait-card{
+  background:#fffbf2;
+  border:1.5px solid var(--gold);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 14px 35px rgba(92,15,29,.12);
+  display:flex;
+  flex-direction:column;
+  transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s ease,border-color .3s;
+}
+.portrait-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 20px 45px rgba(92,15,29,.2);
+  border-color:var(--gold2);
+}
+.portrait-img-box{
+  position:relative;
+  width:100%;
+  height:380px;
+  overflow:hidden;
+  background:var(--deep);
+  flex-shrink:0;
+}
+@media(max-width:640px){
+  .portrait-img-box{
+    height:220px;
+  }
+}
+@media(max-width:400px){
+  .portrait-img-box{
+    height:180px;
+  }
+}
+.portrait-img-box img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center 15% !important;
+  display:block;
+  transition:transform .8s ease;
+}
+.portrait-card:hover .portrait-img-box img{
+  transform:scale(1.06);
+}
+.portrait-badge{
+  position:absolute;
+  top:.85rem;
+  left:.85rem;
+  z-index:2;
+  background:rgba(59,9,18,.88);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  color:var(--gold2);
+  border:1px solid var(--gold);
+  padding:.3rem .75rem;
+  border-radius:30px;
+  font-size:.65rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+@media(max-width:640px){
+  .portrait-badge{
+    top:.5rem;
+    left:.5rem;
+    padding:.2rem .5rem;
+    font-size:.58rem;
+    letter-spacing:.05em;
+  }
+}
+.portrait-details{
+  padding:1.25rem 1rem 1.4rem;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  flex:1;
+  background:#fffbf2;
+}
+@media(max-width:640px){
+  .portrait-details{
+    padding:.85rem .5rem 1rem;
+  }
+}
+.portrait-name{
+  font-family:var(--serif);
+  font-size:1.45rem;
+  font-weight:600;
+  color:var(--maroon);
+  line-height:1.2;
+  margin-bottom:.2rem;
+}
+@media(max-width:640px){
+  .portrait-name{
+    font-size:1.05rem;
+  }
+}
+.portrait-sanskrit{
+  font-size:.88rem;
+  color:var(--gold);
+  font-weight:600;
+  margin-bottom:.25rem;
+}
+@media(max-width:640px){
+  .portrait-sanskrit{
+    font-size:.75rem;
+    margin-bottom:.15rem;
+  }
+}
+.portrait-role{
+  font-size:.68rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--maroon2);
+  font-weight:600;
+}
+@media(max-width:640px){
+  .portrait-role{
+    font-size:.6rem;
+  }
+}
+.portrait-quote{
+  font-family:var(--serif);
+  font-size:.88rem;
+  font-style:italic;
+  color:#55343d;
+  line-height:1.5;
+  margin-top:.6rem;
+  max-width:280px;
+}
+@media(max-width:640px){
+  .portrait-quote{
+    display:none;
+  }
+}
+
+/* venue & location showcase matching user design */
+#venue{background:var(--ivory);padding:5rem 1.25rem}
+.venue-showcase{
+  display:grid;
+  gap:2rem;
+  grid-template-columns:1fr;
+  max-width:1040px;
+  margin:2.5rem auto 0;
+  align-items:stretch;
+}
+@media(min-width:840px){
+  .venue-showcase{
+    grid-template-columns:1fr 1.08fr;
+  }
+}
+.venue-card{
+  background:#fff9ec;
+  border:1.5px solid var(--gold);
+  border-radius:24px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  box-shadow:0 14px 35px rgba(92,15,29,.12);
+  transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s ease,border-color .3s;
+}
+.venue-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 20px 45px rgba(92,15,29,.2);
+  border-color:var(--gold2);
+}
+.venue-media{
+  width:100%;
+  height:240px;
+  min-height:240px;
+  max-height:240px;
+  position:relative;
+  overflow:hidden;
+  background:var(--deep);
+  flex-shrink:0;
+}
+.venue-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .8s ease;
+}
+.venue-card:hover .venue-media img{
+  transform:scale(1.06);
+}
+.venue-badge{
+  position:absolute;
+  top:.85rem;
+  left:.85rem;
+  background:rgba(59,9,18,.85);
+  color:var(--gold2);
+  padding:.35rem .85rem;
+  border-radius:20px;
+  font-size:.7rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  border:1px solid var(--gold);
+}
+.venue-details{
+  padding:1.4rem 1.25rem 1.6rem;
+  text-align:left;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+.venue-details h3{
+  font-family:var(--serif);
+  font-size:1.6rem;
+  color:var(--maroon);
+  line-height:1.2;
+  margin-bottom:.2rem;
+}
+.venue-sub{
+  font-size:.9rem;
+  color:var(--gold);
+  font-weight:600;
+  margin-bottom:.6rem;
+}
+.venue-addr{
+  font-size:.88rem;
+  line-height:1.6;
+  color:#4a2c33;
+  margin-bottom:1.25rem;
+  flex:1;
+}
+
+/* location card matching reference design */
+.location-showcase-box{
+  background:#fffbf2;
+  border:1.5px solid var(--gold);
+  border-radius:24px;
+  padding:2rem 1.5rem 1.8rem;
+  box-shadow:0 16px 40px rgba(92,15,29,.12);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  height:100%;
+  box-sizing:border-box;
+}
+.location-heading{
+  font-family:var(--serif);
+  font-size:2.4rem;
+  color:var(--maroon);
+  font-weight:600;
+  line-height:1.15;
+  margin-bottom:.35rem;
+}
+.location-sub{
+  font-family:var(--sans);
+  font-size:.78rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:600;
+  margin-bottom:1.5rem;
+}
+.map-card-link{
+  display:block;
+  width:100%;
+  max-width:480px;
+  text-decoration:none;
+  transition:transform .4s cubic-bezier(0.16,1,0.3,1);
+}
+.map-card-link:hover{
+  transform:translateY(-4px);
+}
+.custom-map-card{
+  width:100%;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 16px 36px rgba(92,15,29,.14);
+  border:1.5px solid var(--gold);
+  background:#f8f1df;
+  transition:box-shadow .4s ease, border-color .3s ease;
+}
+.map-card-link:hover .custom-map-card{
+  box-shadow:0 22px 48px rgba(92,15,29,.22);
+  border-color:var(--gold2);
+}
+.location-addr{
+  font-family:var(--serif);
+  font-size:1.2rem;
+  color:#4a2c33;
+  margin-top:1.35rem;
+  margin-bottom:1.15rem;
+  font-weight:500;
+}
+.location-actions{
+  display:flex;
+  gap:.85rem;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  width:100%;
+}
+.loc-pill-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:.7rem 1.6rem;
+  border-radius:30px;
+  font-family:var(--sans);
+  font-size:.9rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .3s ease;
+  text-decoration:none;
+}
+.loc-pill-btn.primary{
+  background:var(--maroon);
+  color:#ffffff;
+  border:1.5px solid var(--maroon);
+  box-shadow:0 6px 18px rgba(92,15,29,.25);
+}
+.loc-pill-btn.primary:hover{
+  background:#430a14;
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(92,15,29,.35);
+}
+.loc-pill-btn.secondary{
+  background:#fff9ec;
+  color:var(--maroon);
+  border:1.5px solid var(--gold);
+  box-shadow:0 4px 14px rgba(212,168,75,.2);
+}
+.loc-pill-btn.secondary:hover{
+  background:#fdf2da;
+  border-color:var(--gold2);
+  transform:translateY(-2px);
+}
+.copy-toast{
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .3s ease, transform .3s ease;
+  transform:translateY(6px);
+  margin-top:.75rem;
+  font-size:.82rem;
+  color:var(--maroon);
+  font-weight:600;
+  background:#fff2d6;
+  padding:.3rem .9rem;
+  border-radius:20px;
+  border:1px solid var(--gold);
+}
+.copy-toast.show{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+
 footer{background:var(--deep);color:var(--gold2);padding:3rem 1.25rem calc(3rem + env(safe-area-inset-bottom,0px));text-align:center}
 footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
 .rv{opacity:0;transform:translateY(24px);transition:opacity .9s,transform .9s}.rv.show{opacity:1;transform:none}
@@ -555,7 +759,7 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
   Two souls joined in timeless devotion, beginning an eternal journey of love, honor, and sacred companionship.
  </p>
 
- <!-- Bride & Groom Side-by-Side (Desktop & Mobile) -->
+ <!-- Bride & Groom Side-by-Side 2-Column Grid (No Slider) -->
  <div class="portrait-grid">
   
   <!-- Bride Card -->
@@ -716,7 +920,7 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
  <div class="orn">❖</div>
  
  <div class="venue-showcase">
-  <!-- Venue Photo Card -->
+  <!-- Venue Architectural Photo Card -->
   <div class="venue-card">
    <div class="venue-media">
     <img src="images/white_church.jpg" alt="The White Church Sanctuary &amp; Grounds" loading="lazy">
@@ -728,25 +932,55 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
     <p id="vAddr" class="venue-addr">125 Rd · Countryside Estate Sanctuary<br>A picturesque limestone estate framed by ancient oaks, cloister gardens, and serene pastoral meadows.</p>
     <div class="btns">
      <a class="btn" id="calBtn" target="_blank" rel="noopener">Add to Calendar</a>
-     <a class="btn ghost" id="mapBtn" target="_blank" rel="noopener">View on Map</a>
+     <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=The+White+Church+125+Rd" target="_blank" rel="noopener">Explore Venue</a>
     </div>
    </div>
   </div>
 
-  <!-- Google Map Card -->
-  <div class="venue-card">
-   <div class="venue-media">
-    <iframe src="https://maps.google.com/maps?q=The+White+Church+125+Rd&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="240" style="border:0;" allowfullscreen="" loading="lazy" title="Google Maps - The White Church Location"></iframe>
-    <div class="venue-badge map-badge">📍 Google Maps Navigation</div>
-   </div>
-   <div class="venue-details">
-    <h3>Location &amp; Directions</h3>
-    <p class="venue-sub deva">मार्ग दर्शन एवं सहायता</p>
-    <p class="venue-addr">125 Rd · Complimentary valet parking will be available at the main sanctuary gate for all honored guests.</p>
-    <div class="btns">
-     <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=The+White+Church+125+Rd" target="_blank" rel="noopener">Get Driving Directions</a>
+  <!-- Custom Location Showcase Card Matching Reference Screenshot -->
+  <div class="location-showcase-box">
+   <h3 class="location-heading">Location</h3>
+   <div class="location-sub">TAP THE MAP</div>
+   
+   <a href="https://www.google.com/maps/search/?api=1&amp;query=The+White+Church+125+Rd" target="_blank" rel="noopener" class="map-card-link" aria-label="Open location in Google Maps">
+    <div class="custom-map-card">
+     <svg viewBox="0 0 540 340" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="display:block;border-radius:22px;overflow:hidden">
+      <!-- Base Background -->
+      <rect width="540" height="340" rx="22" fill="#f8f1df" stroke="#d4a84b" stroke-width="1.8"/>
+
+      <!-- Road Grid (White Bands) -->
+      <rect x="175" y="0" width="18" height="340" fill="#ffffff"/>
+      <rect x="250" y="0" width="18" height="340" fill="#ffffff"/>
+      <rect x="0" y="155" width="540" height="18" fill="#ffffff"/>
+
+      <!-- Landscape & Plot Blocks -->
+      <rect x="35" y="32" width="125" height="98" rx="14" fill="#e8dfce"/>
+      <rect x="65" y="195" width="95" height="75" rx="14" fill="#e8dfce"/>
+      <rect x="208" y="195" width="100" height="75" rx="14" fill="#e8dfce"/>
+      <rect x="335" y="32" width="165" height="105" rx="16" fill="#d2e5cf"/>
+      <rect x="330" y="195" width="165" height="75" rx="14" fill="#edd5cd"/>
+
+      <!-- Route Line (Rich Maroon Flowing Path) -->
+      <path d="M 50 240 C 95 235, 115 190, 145 150 C 175 110, 220 145, 290 148 C 345 150, 365 110, 415 88" 
+            fill="none" stroke="#5c0f1d" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- Location Marker Pin at (415, 88) -->
+      <g transform="translate(415, 88)">
+       <path d="M 0 0 C 0 0, -22 -30, -22 -50 C -22 -66, -10 -76, 0 -76 C 10 -76, 22 -66, 22 -50 C 22 -30, 0 0, 0 0 Z" 
+             fill="#5c0f1d" stroke="#d4a84b" stroke-width="2.5" stroke-linejoin="round"/>
+       <circle cx="0" cy="-50" r="8.5" fill="#ffffff"/>
+      </g>
+     </svg>
     </div>
+   </a>
+
+   <div class="location-addr">The White Church, 125 Rd</div>
+
+   <div class="location-actions">
+    <a href="https://www.google.com/maps/dir/?api=1&amp;destination=The+White+Church+125+Rd" target="_blank" rel="noopener" class="loc-pill-btn primary">Get directions</a>
+    <button type="button" class="loc-pill-btn secondary" id="copyAddrBtn">Copy address</button>
    </div>
+   <div id="copyToast" class="copy-toast">✓ Address copied to clipboard!</div>
   </div>
  </div>
 
@@ -943,4 +1177,37 @@ initInteractiveSlider('evList', 'evPrev', 'evNext', 'evDots', 'card');
 
 // Initialize Cherished Moments Gallery Slider
 initInteractiveSlider('shubhGalScroll', 'galPrev', 'galNext', 'galDots', 'coverflow-card');
+
+/* copy address handler */
+var copyBtn = document.getElementById('copyAddrBtn');
+var copyToast = document.getElementById('copyToast');
+if(copyBtn){
+ copyBtn.addEventListener('click', function(){
+  var addr = 'The White Church, 125 Rd';
+  if(navigator.clipboard && navigator.clipboard.writeText){
+   navigator.clipboard.writeText(addr).then(function(){
+    showToast();
+   }).catch(function(){
+    fallbackCopy(addr);
+   });
+  } else {
+   fallbackCopy(addr);
+  }
+ });
+}
+function fallbackCopy(text){
+ var ta = document.createElement('textarea');
+ ta.value = text;
+ document.body.appendChild(ta);
+ ta.select();
+ document.execCommand('copy');
+ document.body.removeChild(ta);
+ showToast();
+}
+function showToast(){
+ if(!copyToast) return;
+ copyToast.classList.add('show');
+ setTimeout(function(){ copyToast.classList.remove('show'); }, 2500);
+}
+
 </script></body></html>
