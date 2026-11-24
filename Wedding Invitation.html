@@ -60,28 +60,119 @@ section{padding:clamp(3.5rem,9vw,6rem) 1.25rem;text-align:center;position:relati
 .fam div{background:#fff9ec;border:1px solid var(--gold);padding:1.5rem 1rem;border-radius:4px}
 .fam h3{color:var(--maroon);font-size:1.6rem}.fam .tag{display:block;margin-bottom:.3rem}
 
-/* bride & groom portrait showcase */
+/* coverflow story card slider (matching reference image) */
+.story-slider-wrap{position:relative;max-width:1200px;margin:1.5rem auto 0;padding:0;overflow:visible}
+.story-scroll{display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:1.5rem .75rem 2rem;cursor:grab;scrollbar-width:none}
+.story-scroll.center-desktop{justify-content:center}
+@media(max-width:768px){.story-scroll.center-desktop{justify-content:flex-start}}
+.story-scroll:active{cursor:grabbing}
+.story-scroll::-webkit-scrollbar{display:none}
+
+.coverflow-card{
+  flex:0 0 310px;
+  width:310px;
+  height:480px;
+  min-height:480px;
+  max-height:480px;
+  scroll-snap-align:center;
+  border-radius:24px;
+  overflow:hidden;
+  position:relative;
+  background:var(--deep);
+  border:1.5px solid rgba(212,168,75,.45);
+  box-shadow:0 18px 45px rgba(25,4,8,.38);
+  transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s ease,border-color .3s ease;
+  cursor:pointer;
+  box-sizing:border-box;
+  opacity:1 !important;
+  transform:none !important;
+  visibility:visible !important;
+}
+@media(max-width:640px){
+  .coverflow-card{
+    flex:0 0 76vw;
+    width:76vw;
+    max-width:320px;
+    height:470px;
+    min-height:470px;
+    max-height:470px;
+    border-radius:22px;
+  }
+}
+.coverflow-card:hover{
+  transform:translateY(-8px) scale(1.02) !important;
+  box-shadow:0 24px 50px rgba(59,9,18,.5);
+  border-color:var(--gold);
+}
+.coverflow-card img{
+  position:absolute;
+  inset:0;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center top !important;
+  display:block;
+  transition:transform .8s ease;
+}
+.coverflow-card:hover img{
+  transform:scale(1.08);
+}
+.coverflow-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0) 25%,rgba(20,3,7,.65) 58%,rgba(15,2,5,.96) 92%);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:center;
+  text-align:center;
+  padding:1.8rem 1.4rem 1.6rem;
+  color:#fff;
+  z-index:2;
+  pointer-events:none;
+}
+.coverflow-chapter{
+  font-family:var(--sans);
+  font-size:.72rem;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--gold2);
+  font-weight:600;
+  margin-bottom:.35rem;
+}
+.coverflow-title{
+  font-family:var(--serif);
+  font-size:1.55rem;
+  font-weight:600;
+  color:#ffffff;
+  line-height:1.25;
+  margin-bottom:.3rem;
+  text-shadow:0 2px 8px rgba(0,0,0,.6);
+}
+.coverflow-sub{
+  font-family:var(--deva);
+  font-size:.95rem;
+  color:var(--gold2);
+  margin-bottom:.5rem;
+  letter-spacing:.04em;
+}
+.coverflow-desc{
+  font-family:var(--sans);
+  font-size:.83rem;
+  line-height:1.55;
+  color:rgba(255,245,235,.9);
+  font-weight:300;
+  margin:0;
+  max-width:290px;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  text-shadow:0 1px 4px rgba(0,0,0,.7);
+}
+
 #portrait{background:var(--cream);padding:5rem 1.5rem}
-.portrait-intro{font-family:var(--serif);font-size:1.18rem;font-style:italic;color:var(--maroon);max-width:620px;margin:0 auto 2.5rem;line-height:1.6;text-align:center}
-.portrait-wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem;max-width:960px;margin:0 auto;align-items:stretch}
-@media(max-width:768px){.portrait-wrap{grid-template-columns:1fr;gap:2rem;max-width:440px}}
-.portrait-card{display:flex;flex-direction:column;height:100%;position:relative}
-.portrait-frame{background:#fffbf2;border:1.5px solid var(--gold);border-radius:12px;overflow:hidden;box-shadow:0 16px 45px rgba(92,15,29,.12);display:flex;flex-direction:column;height:100%;position:relative;transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s ease,border-color .3s ease}
-.portrait-frame::before{content:"";position:absolute;inset:6px;border:1px solid rgba(212,168,75,.4);border-radius:8px;pointer-events:none;z-index:2}
-.portrait-card:hover .portrait-frame{transform:translateY(-6px);box-shadow:0 24px 50px rgba(92,15,29,.2);border-color:var(--gold2)}
-.portrait-img-box{position:relative;width:100%;height:450px;overflow:hidden;background:var(--deep);flex-shrink:0}
-@media(max-width:480px){.portrait-img-box{height:390px}}
-.portrait-img-box img{width:100% !important;height:100% !important;object-fit:cover !important;object-position:center 15% !important;display:block;transition:transform .8s ease}
-.portrait-card:hover .portrait-img-box img{transform:scale(1.05)}
-.portrait-badge{position:absolute;top:1.2rem;left:1.2rem;z-index:3;background:rgba(59,9,18,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--gold2);border:1px solid var(--gold);padding:.35rem .9rem;border-radius:30px;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 4px 15px rgba(0,0,0,.25)}
-.portrait-details{padding:1.6rem 1.4rem 1.8rem;display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;background:#fffbf2;position:relative;z-index:1}
-.portrait-name{font-family:var(--serif);font-size:1.65rem;font-weight:600;color:var(--maroon);line-height:1.2;margin-bottom:.25rem}
-.portrait-sanskrit{font-size:.95rem;color:var(--gold);font-weight:600;margin-bottom:.2rem;letter-spacing:.05em}
-.portrait-role{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--maroon2);font-weight:600;margin-bottom:.85rem}
-.portrait-divider{width:48px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin-bottom:.85rem}
-.portrait-quote{font-family:var(--serif);font-size:.95rem;font-style:italic;color:#55343d;line-height:1.55;margin:0;max-width:320px}
-
-
+.portrait-intro{font-family:var(--serif);font-size:1.18rem;font-style:italic;color:var(--maroon);max-width:620px;margin:0 auto 1.5rem;line-height:1.6;text-align:center}
 /* shared slider navigation & controls */
 .slider-wrap-box{position:relative;max-width:1160px;margin:1.8rem auto 0;padding:0;overflow:hidden}
 .slider-nav-btn{display:none !important}
@@ -313,41 +404,37 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
   Two souls joined in timeless devotion, beginning an eternal journey of love, honor, and sacred companionship.
  </p>
 
- <div class="portrait-wrap">
-  <!-- Bride Card -->
-  <div class="portrait-card">
-   <div class="portrait-frame">
-    <div class="portrait-img-box">
-     <img src="images/bride_editorial.jpg" alt="Kasandra Elena Vance - The Bride" loading="lazy">
-     <div class="portrait-badge">वधू · The Bride</div>
-    </div>
-    <div class="portrait-details">
-     <h3 class="portrait-name">Kasandra Elena Vance</h3>
-     <p class="portrait-sanskrit deva">॥ सौभाग्यवती भव ॥</p>
-     <p class="portrait-role">The Radiant Bride</p>
-     <div class="portrait-divider"></div>
-     <p class="portrait-quote">“In your eyes, I have found my forever home, my deepest peace, and my truest joy.”</p>
+ <!-- Bride & Groom Side-by-Side Slider (Mobile & Desktop) -->
+ <div class="story-slider-wrap" id="portraitSliderContainer">
+  <div class="story-scroll center-desktop" id="portraitScroll">
+   
+   <!-- Bride Card -->
+   <div class="coverflow-card" data-src="images/bride_editorial.jpg" data-title="Kasandra Elena Vance · The Bride" data-desc="“In your eyes, I have found my forever home, my deepest peace, and my truest joy.”">
+    <img src="images/bride_editorial.jpg" alt="Kasandra Elena Vance - The Bride" loading="lazy">
+    <div class="coverflow-overlay">
+     <span class="coverflow-chapter">CHAPTER I · THE BRIDE</span>
+     <h3 class="coverflow-title">Kasandra Elena Vance</h3>
+     <div class="coverflow-sub deva">॥ सौभाग्यवती भव ॥</div>
+     <p class="coverflow-desc">“In your eyes, I have found my forever home, my deepest peace, and my truest joy.”</p>
     </div>
    </div>
-  </div>
 
-  <!-- Groom Card -->
-  <div class="portrait-card">
-   <div class="portrait-frame">
-    <div class="portrait-img-box">
-     <img src="images/groom_editorial.jpg" alt="Imanule David Thome - The Groom" loading="lazy">
-     <div class="portrait-badge">वर · The Groom</div>
-    </div>
-    <div class="portrait-details">
-     <h3 class="portrait-name">Imanule David Thome</h3>
-     <p class="portrait-sanskrit deva">॥ आयुष्मान् भव ॥</p>
-     <p class="portrait-role">The Noble Groom</p>
-     <div class="portrait-divider"></div>
-     <p class="portrait-quote">“With every sacred vow and every heartbeat, I promise to walk beside you for all of eternity.”</p>
+   <!-- Groom Card -->
+   <div class="coverflow-card" data-src="images/groom_editorial.jpg" data-title="Imanule David Thome · The Groom" data-desc="“With every sacred vow and every heartbeat, I promise to walk beside you for all of eternity.”">
+    <img src="images/groom_editorial.jpg" alt="Imanule David Thome - The Groom" loading="lazy">
+    <div class="coverflow-overlay">
+     <span class="coverflow-chapter">CHAPTER II · THE GROOM</span>
+     <h3 class="coverflow-title">Imanule David Thome</h3>
+     <div class="coverflow-sub deva">॥ आयुष्मान् भव ॥</div>
+     <p class="coverflow-desc">“With every sacred vow and every heartbeat, I promise to walk beside you for all of eternity.”</p>
     </div>
    </div>
+
   </div>
  </div>
+ <div class="slider-dots" id="portraitDots"></div>
+ <div class="slider-hint-text">← Swipe across to view the bride &amp; groom →</div>
+
 </div></section>
 
 <section id="events"><div class="wrap">
@@ -372,79 +459,87 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
   A visual chronicle of sacred vows, quiet glances, radiant smiles, and eternal devotion along our journey of love.
  </p>
 
- <!-- Horizontal Photo Slider with Image & Description -->
- <div class="slider-wrap-box rv" id="galSliderContainer">
-  <div class="gal-scroll" id="shubhGalScroll">
+ <!-- Coverflow Journey Slider matching reference design -->
+ <div class="story-slider-wrap rv" id="galSliderContainer">
+  <div class="story-scroll" id="shubhGalScroll">
    
-   <div class="gal-card" data-src="images/couple_editorial.jpg" data-title="Gala Reception Elegance · राजसी रिसेप्शन" data-desc="Kasandra and Imanule celebrating in luxury black-tie attire under twilight crystal chandeliers with family and friends.">
-    <div class="gal-card-img-wrap"><img src="images/couple_editorial.jpg" alt="Royal Celebration" loading="lazy"></div>
-    <div class="gal-card-body">
-     <span class="gal-card-meta">Reception · प्रीतिभोज</span>
-     <h3 class="gal-card-title">Gala Reception Elegance</h3>
-     <p class="gal-card-desc">Kasandra and Imanule celebrating in luxury black-tie attire under twilight chandeliers with family and friends.</p>
+   <div class="coverflow-card" data-src="images/couple_sunlight.jpg" data-title="How We Met · पहली मुलाकात" data-desc="A chance meeting at a cozy bookstore café turned into an afternoon of endless laughter and coffee.">
+    <img src="images/couple_sunlight.jpg" alt="How We Met" loading="lazy">
+    <div class="coverflow-overlay">
+     <span class="coverflow-chapter">CHAPTER I</span>
+     <h3 class="coverflow-title">How We Met</h3>
+     <div class="coverflow-sub deva">पहली मुलाकात</div>
+     <p class="coverflow-desc">A chance meeting at a cozy bookstore café turned into an afternoon of endless laughter and coffee.</p>
     </div>
    </div>
 
-   <div class="gal-card" data-src="images/couple_sunlight.jpg" data-title="Golden Hour Embrace · स्वर्णिम आलिंगन" data-desc="Intimate golden hour forehead embrace with radiant sunlight flare as two souls unite in lifelong devotion.">
-    <div class="gal-card-img-wrap"><img src="images/couple_sunlight.jpg" alt="Golden Hour Romance" loading="lazy"></div>
-    <div class="gal-card-body">
-     <span class="gal-card-meta">Romance · प्रेम</span>
-     <h3 class="gal-card-title">Golden Hour Embrace</h3>
-     <p class="gal-card-desc">Intimate golden hour forehead embrace with radiant sunlight flare as two souls unite in lifelong devotion.</p>
+   <div class="coverflow-card" data-src="images/event_welcome.jpg" data-title="First Date · प्रेम का प्रारंभ" data-desc="Long walks along the riverbanks under golden autumn leaves where hours felt like sweet fleeting minutes.">
+    <img src="images/event_welcome.jpg" alt="First Date" loading="lazy">
+    <div class="coverflow-overlay">
+     <span class="coverflow-chapter">CHAPTER II</span>
+     <h3 class="coverflow-title">First Date</h3>
+     <div class="coverflow-sub deva">प्रेम का प्रारंभ</div>
+     <p class="coverflow-desc">Long walks along the riverbanks under golden autumn leaves where hours felt like sweet fleeting minutes.</p>
     </div>
    </div>
 
-   <div class="gal-card" data-src="images/mandap_ceremony.jpg" data-title="Sacred Mandap Ceremony · पवित्र सात फेरे" data-desc="Sacred Mandap pheras and Vedic blessings in royal maroon sherwani and bridal red lehenga around holy Agni.">
-    <div class="gal-card-img-wrap"><img src="images/mandap_ceremony.jpg" alt="Sacred Mandap Ceremony" loading="lazy"></div>
-    <div class="gal-card-body">
-     <span class="gal-card-meta">Vows · सात फेरे</span>
-     <h3 class="gal-card-title">Sacred Mandap Pheras</h3>
-     <p class="gal-card-desc">Sacred Mandap pheras and Vedic blessings in royal maroon sherwani and bridal red lehenga around holy Agni.</p>
+   <div class="coverflow-card" data-src="images/gallery_rings.jpg" data-title="The Sacred Covenant · पवित्र वचन" data-desc="The sacred covenant of eternity - Custom gold wedding bands crafted with timeless symbols of devotion.">
+    <img src="images/gallery_rings.jpg" alt="The Sacred Covenant" loading="lazy">
+    <div class="coverflow-overlay">
+     <span class="coverflow-chapter">CHAPTER III</span>
+     <h3 class="coverflow-title">The Sacred Covenant</h3>
+     <div class="coverflow-sub deva">पवित्र वचन</div>
+     <p class="coverflow-desc">The sacred covenant of eternity - Custom gold wedding bands crafted with timeless symbols of devotion.</p>
     </div>
    </div>
 
-   <div class="gal-card" data-src="images/wedding_hands.jpg" data-title="Bridal Mehendi &amp; Chooda · मेहंदी एवं चूड़ा" data-desc="Sacred bridal mehendi, auspicious red chooda bangles, and floral garlands joined in eternal devotion.">
-    <div class="gal-card-img-wrap"><img src="images/wedding_hands.jpg" alt="Bridal Mehendi" loading="lazy"></div>
-    <div class="gal-card-body">
-     <span class="gal-card-meta">Henna · मेहंदी</span>
-     <h3 class="gal-card-title">Bridal Mehendi &amp; Chooda</h3>
-     <p class="gal-card-desc">Sacred bridal mehendi, auspicious red chooda bangles, and floral garlands joined in eternal devotion.</p>
+   <div class="coverflow-card" data-src="images/wedding_hands.jpg" data-title="Bridal Mehendi · मेहंदी एवं चूड़ा" data-desc="Intricate henna designs, traditional red chooda bangles, and sacred floral garlands joined in timeless devotion.">
+    <img src="images/wedding_hands.jpg" alt="Bridal Mehendi" loading="lazy">
+    <div class="coverflow-overlay">
+     <span class="coverflow-chapter">CHAPTER IV</span>
+     <h3 class="coverflow-title">Bridal Mehendi</h3>
+     <div class="coverflow-sub deva">मेहंदी एवं चूड़ा</div>
+     <p class="coverflow-desc">Intricate henna designs, traditional red chooda bangles, and sacred floral garlands joined in timeless devotion.</p>
     </div>
    </div>
 
-   <div class="gal-card" data-src="images/gallery_veil.jpg" data-title="Lace Veil Reflections · घूंघट के साये में" data-desc="A serene and sacred portrait of the bride bathed in soft natural light beneath her delicate embroidered lace veil.">
-    <div class="gal-card-img-wrap"><img src="images/gallery_veil.jpg" alt="Lace Veil Reflections" loading="lazy"></div>
-    <div class="gal-card-body">
-     <span class="gal-card-meta">The Bride · घूंघट</span>
-     <h3 class="gal-card-title">Lace Veil Reflections</h3>
-     <p class="gal-card-desc">A serene and sacred portrait of the bride bathed in soft natural light beneath her delicate embroidered lace veil.</p>
+   <div class="coverflow-card" data-src="images/mandap_ceremony.jpg" data-title="Sacred Mandap Pheras · पवित्र सात फेरे" data-desc="Taking the seven eternal steps around the holy fire in royal maroon sherwani and bridal red lehenga.">
+    <img src="images/mandap_ceremony.jpg" alt="Sacred Mandap Pheras" loading="lazy">
+    <div class="coverflow-overlay">
+     <span class="coverflow-chapter">CHAPTER V</span>
+     <h3 class="coverflow-title">Sacred Mandap Pheras</h3>
+     <div class="coverflow-sub deva">पवित्र सात फेरे</div>
+     <p class="coverflow-desc">Taking the seven eternal steps around the holy fire in royal maroon sherwani and bridal red lehenga.</p>
     </div>
    </div>
 
-   <div class="gal-card" data-src="images/gallery_rings.jpg" data-title="The Rings of Eternity · पवित्र अंगूठियां" data-desc="The sacred covenant of eternity - Custom gold wedding bands crafted with timeless symbols of devotion.">
-    <div class="gal-card-img-wrap"><img src="images/gallery_rings.jpg" alt="Sacred Rings" loading="lazy"></div>
-    <div class="gal-card-body">
-     <span class="gal-card-meta">Promise · वचन</span>
-     <h3 class="gal-card-title">The Rings of Eternity</h3>
-     <p class="gal-card-desc">The sacred covenant of eternity - Custom gold wedding bands crafted with timeless symbols of devotion.</p>
+   <div class="coverflow-card" data-src="images/couple_editorial.jpg" data-title="Gala Reception · राजसी रिसेप्शन" data-desc="Kasandra and Imanule celebrating their holy vows under cascading twilight crystal chandeliers in regal black-tie elegance.">
+    <img src="images/couple_editorial.jpg" alt="Gala Reception" loading="lazy">
+    <div class="coverflow-overlay">
+     <span class="coverflow-chapter">CHAPTER VI</span>
+     <h3 class="coverflow-title">Royal Reception Gala</h3>
+     <div class="coverflow-sub deva">राजसी रिसेप्शन</div>
+     <p class="coverflow-desc">Kasandra and Imanule celebrating their holy vows under cascading twilight crystal chandeliers in regal black-tie elegance.</p>
     </div>
    </div>
 
-   <div class="gal-card" data-src="images/gallery_cheers.jpg" data-title="Celebration Toast · शुभकामना एवं आनंद" data-desc="Champagne flutes raised in joyous celebration with beloved family and guests toast to eternal happiness.">
-    <div class="gal-card-img-wrap"><img src="images/gallery_cheers.jpg" alt="Celebration Toast" loading="lazy"></div>
-    <div class="gal-card-body">
-     <span class="gal-card-meta">Celebration · बधाई</span>
-     <h3 class="gal-card-title">A Toast to Joy</h3>
-     <p class="gal-card-desc">Champagne flutes raised in joyous celebration with beloved family and guests to toast to eternal happiness.</p>
+   <div class="coverflow-card" data-src="images/gallery_cheers.jpg" data-title="Celebration Toast · शुभकामना एवं आनंद" data-desc="Champagne flutes raised in joyous celebration with beloved family and guests to toast to eternal happiness.">
+    <img src="images/gallery_cheers.jpg" alt="Celebration Toast" loading="lazy">
+    <div class="coverflow-overlay">
+     <span class="coverflow-chapter">CHAPTER VII</span>
+     <h3 class="coverflow-title">A Toast to Joy</h3>
+     <div class="coverflow-sub deva">शुभकामना एवं आनंद</div>
+     <p class="coverflow-desc">Champagne flutes raised in joyous celebration with beloved family and guests to toast to eternal happiness.</p>
     </div>
    </div>
 
-   <div class="gal-card" data-src="images/gallery_cake.jpg" data-title="Artisanal Wedding Cake · मधुर शुरुआत" data-desc="Artisanal vanilla bean wedding cake decorated with fresh garden flora and berries for our sweet beginning.">
-    <div class="gal-card-img-wrap"><img src="images/gallery_cake.jpg" alt="Wedding Cake" loading="lazy"></div>
-    <div class="gal-card-body">
-     <span class="gal-card-meta">Tradition · मिष्ठान्न</span>
-     <h3 class="gal-card-title">Artisanal Wedding Cake</h3>
-     <p class="gal-card-desc">Artisanal vanilla bean wedding cake decorated with fresh garden flora and berries for our sweet beginning.</p>
+   <div class="coverflow-card" data-src="images/gallery_cake.jpg" data-title="Forever Begins · अनंत प्रेम" data-desc="Surrounded by our dearest family and cherished friends, our eternal chapter begins today with sweet blessings.">
+    <img src="images/gallery_cake.jpg" alt="Forever Begins" loading="lazy">
+    <div class="coverflow-overlay">
+     <span class="coverflow-chapter">CHAPTER VIII</span>
+     <h3 class="coverflow-title">Forever Begins</h3>
+     <div class="coverflow-sub deva">अनंत प्रेम</div>
+     <p class="coverflow-desc">Surrounded by our dearest family and cherished friends, our eternal chapter begins today with sweet blessings.</p>
     </div>
    </div>
 
@@ -580,7 +675,7 @@ function openLb(src, title, desc){
 }
 if(lbClose) lbClose.onclick = function(){ lb.classList.remove('open'); };
 if(lb) lb.onclick = function(e){ if(e.target === lb || e.target.id === 'lb-img-box') lb.classList.remove('open'); };
-document.querySelectorAll('.gal-card, .gal-grid-card').forEach(function(el){
+document.querySelectorAll('.coverflow-card, .gal-card, .gal-grid-card').forEach(function(el){
  el.addEventListener('click', function(){
   var src = el.getAttribute('data-src') || (el.querySelector('img') ? el.querySelector('img').src : '');
   var title = el.getAttribute('data-title') || el.getAttribute('data-cap') || '';
@@ -693,6 +788,9 @@ function initInteractiveSlider(scrollId, prevId, nextId, dotsId, cardClass) {
 // Initialize Sacred Rituals Slider
 initInteractiveSlider('evList', 'evPrev', 'evNext', 'evDots', 'card');
 
+// Initialize Bride & Groom Side-by-Side Slider
+initInteractiveSlider('portraitScroll', null, null, 'portraitDots', 'coverflow-card');
+
 // Initialize Cherished Moments Gallery Slider
-initInteractiveSlider('shubhGalScroll', 'galPrev', 'galNext', 'galDots', 'gal-card');
+initInteractiveSlider('shubhGalScroll', 'galPrev', 'galNext', 'galDots', 'coverflow-card');
 </script></body></html>
