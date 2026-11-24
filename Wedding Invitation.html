@@ -1885,17 +1885,135 @@ button, input, select, textarea {
 }
 
 /* Grid View Switcher Modes */
-.gallery-section.grid-mode .gallery-scroller-wrap {
-  display: none;
+/* Gallery always shows masonry grid + scroller strip above */
+.gallery-masonry {
+  display: grid !important;
 }
 
-.gallery-section.grid-mode .gallery-masonry {
-  display: grid;
+/* ---- CSS-Only Horizontal Photo Scroller Strip ---- */
+.gallery-scroll-strip {
+  position: relative;
+  margin-bottom: 3.5rem;
 }
 
-.gallery-section:not(.grid-mode) .gallery-masonry {
-  display: none;
+.gallery-scroll-label {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
+.gallery-scroll-label::before,
+.gallery-scroll-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(182,154,104,0.4), transparent);
+}
+
+.gallery-scroll-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5rem 0 1.5rem;
+  cursor: grab;
+}
+.gallery-scroll-row:active { cursor: grabbing; }
+.gallery-scroll-row::-webkit-scrollbar { display: none; }
+.gallery-scroll-row { scrollbar-width: none; }
+
+.gs-card {
+  flex: 0 0 clamp(240px, 30vw, 380px);
+  height: clamp(320px, 42vh, 480px);
+  scroll-snap-align: center;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  border: 1.5px solid rgba(182,154,104,0.3);
+  box-shadow: 0 12px 32px rgba(41,40,32,0.12);
+  cursor: pointer;
+  transition: transform 0.45s var(--ease-editorial), box-shadow 0.45s ease, border-color 0.3s;
+}
+.gs-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-gold);
+  box-shadow: 0 20px 44px rgba(41,40,32,0.2);
+}
+.gs-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s var(--ease-editorial);
+}
+.gs-card:hover img { transform: scale(1.06); }
+.gs-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(23,22,18,0.82) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem 1.25rem;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.gs-card:hover .gs-card-overlay { opacity: 1; }
+.gs-card-caption {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #fff;
+  font-style: italic;
+}
+
+.gallery-scroll-hint {
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--color-taupe);
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+.gallery-scroll-hint span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gallery-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0 2.5rem;
+}
+.gallery-divider::before,
+.gallery-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(182,154,104,0.25);
+}
+.gallery-divider-label {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-taupe);
+}
+
 
 /* Ambient Canvas */
 #ambientCanvas {
@@ -2973,12 +3091,52 @@ button, input, select, textarea {
        ========================================================================== -->
   <section class="section-padding gallery-section" id="gallery">
     <div class="container">
-      
+
       <div class="section-header-center reveal">
         <span class="editorial-tag">Visual Diary</span>
         <h2 class="editorial-title">Cherished Moments</h2>
         <p class="editorial-desc">Snapshots of romance, laughter, and milestones along our journey together.</p>
         <div class="divider-gold"></div>
+      </div>
+
+      <!-- Horizontal Photo Scroller Strip -->
+      <div class="gallery-scroll-strip reveal">
+        <div class="gallery-scroll-label">Swipe to explore</div>
+        <div class="gallery-scroll-row" id="photoScrollRow">
+          <div class="gs-card" data-category="celebration" data-src="images/couple_editorial.jpg" data-caption="Gala Reception Elegance">
+            <img src="images/couple_editorial.jpg" alt="Grand Gala Reception Portrait" loading="lazy">
+            <div class="gs-card-overlay"><span class="gs-card-caption">Gala Reception Elegance</span></div>
+          </div>
+          <div class="gs-card" data-category="moments" data-src="images/couple_sunlight.jpg" data-caption="Golden Hour Embrace">
+            <img src="images/couple_sunlight.jpg" alt="Golden Hour Romance" loading="lazy">
+            <div class="gs-card-overlay"><span class="gs-card-caption">Golden Hour Embrace</span></div>
+          </div>
+          <div class="gs-card" data-category="ceremony" data-src="images/mandap_ceremony.jpg" data-caption="Sacred Mandap Ceremony">
+            <img src="images/mandap_ceremony.jpg" alt="Sacred Mandap Ceremony" loading="lazy">
+            <div class="gs-card-overlay"><span class="gs-card-caption">Sacred Mandap Ceremony</span></div>
+          </div>
+          <div class="gs-card" data-category="ceremony" data-src="images/wedding_hands.jpg" data-caption="Bridal Mehendi &amp; Chooda Vows">
+            <img src="images/wedding_hands.jpg" alt="Bridal Mehendi &amp; Chooda Vows" loading="lazy">
+            <div class="gs-card-overlay"><span class="gs-card-caption">Bridal Mehendi &amp; Chooda</span></div>
+          </div>
+          <div class="gs-card" data-category="ceremony" data-src="images/gallery_veil.jpg" data-caption="Lace Veil Reflections">
+            <img src="images/gallery_veil.jpg" alt="Bridal Veil Portrait" loading="lazy">
+            <div class="gs-card-overlay"><span class="gs-card-caption">Lace Veil Reflections</span></div>
+          </div>
+          <div class="gs-card" data-category="ceremony" data-src="images/gallery_rings.jpg" data-caption="The Rings of Eternity">
+            <img src="images/gallery_rings.jpg" alt="Golden Wedding Rings" loading="lazy">
+            <div class="gs-card-overlay"><span class="gs-card-caption">The Rings of Eternity</span></div>
+          </div>
+          <div class="gs-card" data-category="celebration" data-src="images/gallery_cheers.jpg" data-caption="Celebratory Champagne Toast">
+            <img src="images/gallery_cheers.jpg" alt="Champagne Toast" loading="lazy">
+            <div class="gs-card-overlay"><span class="gs-card-caption">Champagne Toast</span></div>
+          </div>
+          <div class="gs-card" data-category="celebration" data-src="images/gallery_cake.jpg" data-caption="Artisanal Wedding Cake">
+            <img src="images/gallery_cake.jpg" alt="Artisanal Wedding Cake" loading="lazy">
+            <div class="gs-card-overlay"><span class="gs-card-caption">Artisanal Wedding Cake</span></div>
+          </div>
+        </div>
+        <p class="gallery-scroll-hint"><span>← Drag or swipe →</span></p>
       </div>
 
       <!-- Filters -->
@@ -2989,7 +3147,12 @@ button, input, select, textarea {
         <button class="gallery-filter-btn" data-filter="celebration">Celebration</button>
       </div>
 
-      <!-- Grid -->
+      <!-- Section Divider -->
+      <div class="gallery-divider">
+        <span class="gallery-divider-label">Full Gallery</span>
+      </div>
+
+      <!-- Masonry Grid (always visible) -->
       <div class="gallery-masonry" id="galleryGrid">
         
         <div class="gallery-card tall reveal" data-category="celebration" data-caption="Kasandra and Imanule celebrating in luxury black-tie attire under twilight chandeliers">
@@ -3476,190 +3639,76 @@ const $$ = s => [...document.querySelectorAll(s)];
   });
 })();
 
-/* ==================== INTERACTIVE GALLERY SCROLLER ENGINE ==================== */
-(function initGalleryScroller() {
-  const viewport = document.getElementById('galleryViewport');
-  const track = document.getElementById('galleryTrack');
-  const prevBtn = document.getElementById('scrollerPrev');
-  const nextBtn = document.getElementById('scrollerNext');
-  const counterCurrent = document.getElementById('currentSlideNum');
-  const counterTotal = document.getElementById('totalSlideNum');
-  const progressBar = document.getElementById('scrollerProgressBar');
-  const dotsContainer = document.getElementById('scrollerDots');
-  const viewModeBtn = document.getElementById('viewModeBtn');
-  const gallerySection = document.getElementById('gallery');
+/* ==================== GALLERY INTERACTIONS ==================== */
+(function initGallery() {
   const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+  const gridCards  = document.querySelectorAll('#galleryGrid .gallery-card');
+  const gsCards    = document.querySelectorAll('#photoScrollRow .gs-card');
 
-  if (!viewport || !track) return;
-
-  const slides = Array.from(track.querySelectorAll('.scroller-slide'));
-  let visibleSlides = [...slides];
-  let isGridMode = false;
-  let autoplayTimer = null;
-
-  // Build Pagination Dots
-  function updateDots() {
-    dotsContainer.innerHTML = '';
-    visibleSlides.forEach((_, idx) => {
-      const dot = document.createElement('button');
-      dot.className = `scroller-dot ${idx === 0 ? 'active' : ''}`;
-      dot.setAttribute('aria-label', `Go to slide ${idx + 1}`);
-      dot.addEventListener('click', () => scrollToSlideIndex(idx));
-      dotsContainer.appendChild(dot);
-    });
-  }
-  updateDots();
-
-  // Get active slide index from scroll position
-  function getActiveIndex() {
-    if (visibleSlides.length === 0) return 0;
-    const scrollLeft = viewport.scrollLeft;
-    let closestIndex = 0;
-    let minDiff = Infinity;
-    visibleSlides.forEach((slide, idx) => {
-      const diff = Math.abs(slide.offsetLeft - scrollLeft - 10);
-      if (diff < minDiff) {
-        minDiff = diff;
-        closestIndex = idx;
-      }
-    });
-    return closestIndex;
-  }
-
-  // Update UI indicators
-  function updateScrollerUI() {
-    const activeIdx = getActiveIndex();
-    const count = visibleSlides.length;
-    if (counterCurrent) counterCurrent.textContent = String(activeIdx + 1).padStart(2, '0');
-    if (counterTotal) counterTotal.textContent = String(count).padStart(2, '0');
-    if (progressBar && count > 0) {
-      const pct = ((activeIdx + 1) / count) * 100;
-      progressBar.style.width = `${pct}%`;
-    }
-    const dots = dotsContainer.querySelectorAll('.scroller-dot');
-    dots.forEach((dot, idx) => {
-      dot.classList.toggle('active', idx === activeIdx);
-    });
-  }
-
-  function scrollToSlideIndex(idx) {
-    if (idx < 0) idx = 0;
-    if (idx >= visibleSlides.length) idx = visibleSlides.length - 1;
-    const target = visibleSlides[idx];
-    if (target) {
-      viewport.scrollTo({
-        left: target.offsetLeft - 10,
-        behavior: 'smooth'
-      });
-    }
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      const curr = getActiveIndex();
-      scrollToSlideIndex(curr - 1);
-    });
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      const curr = getActiveIndex();
-      scrollToSlideIndex(curr + 1);
-    });
-  }
-
-  viewport.addEventListener('scroll', () => {
-    window.requestAnimationFrame(updateScrollerUI);
-  }, { passive: true });
-
-  // Mouse Drag to Scroll
-  let isDown = false;
-  let startX, scrollLeftVal;
-
-  viewport.addEventListener('mousedown', (e) => {
-    isDown = true;
-    startX = e.pageX - viewport.offsetLeft;
-    scrollLeftVal = viewport.scrollLeft;
-  });
-  viewport.addEventListener('mouseleave', () => { isDown = false; });
-  viewport.addEventListener('mouseup', () => { isDown = false; });
-  viewport.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - viewport.offsetLeft;
-    const walk = (x - startX) * 1.6;
-    viewport.scrollLeft = scrollLeftVal - walk;
-  });
-
-  // Filter functionality
+  /* ---- Filter ---- */
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const cat = btn.getAttribute('data-filter');
 
-      // Filter scroller slides
-      slides.forEach(slide => {
-        const slideCat = slide.getAttribute('data-category');
-        const show = (cat === 'all' || slideCat === cat);
-        slide.style.display = show ? 'block' : 'none';
-      });
-
-      // Filter grid cards
-      const gridCards = document.querySelectorAll('#galleryGrid .gallery-card');
       gridCards.forEach(card => {
-        const cCat = card.getAttribute('data-category');
-        const show = (cat === 'all' || cCat === cat);
-        card.style.display = show ? 'block' : 'none';
+        const show = cat === 'all' || card.getAttribute('data-category') === cat;
+        card.style.display = show ? '' : 'none';
       });
 
-      visibleSlides = slides.filter(s => s.style.display !== 'none');
-      updateDots();
-      scrollToSlideIndex(0);
-      updateScrollerUI();
+      gsCards.forEach(card => {
+        const show = cat === 'all' || card.getAttribute('data-category') === cat;
+        card.style.display = show ? '' : 'none';
+      });
     });
   });
 
-  // Toggle between Scroller and Grid View
-  if (viewModeBtn) {
-    viewModeBtn.addEventListener('click', () => {
-      isGridMode = !isGridMode;
-      gallerySection.classList.toggle('grid-mode', isGridMode);
-      const icon = viewModeBtn.querySelector('.mode-icon');
-      const text = viewModeBtn.querySelector('.mode-text');
-      if (isGridMode) {
-        if (icon) icon.textContent = '↔';
-        if (text) text.textContent = 'Scroller View';
-        showToast('⊞ Switched to Full Grid View');
-      } else {
-        if (icon) icon.textContent = '⊞';
-        if (text) text.textContent = 'Grid View';
-        showToast('↔ Switched to Carousel Scroller');
-        updateScrollerUI();
-      }
-    });
-  }
-
-  // Lightbox click on scroller slides
-  slides.forEach(slide => {
-    slide.addEventListener('click', () => {
-      const img = slide.querySelector('img');
-      const caption = slide.getAttribute('data-caption') || img.alt;
-      if (typeof openLightbox === 'function') openLightbox(img.src, caption);
-    });
-  });
-
-  // Marquee card lightbox clicks
-  const marqueeCards = document.querySelectorAll('.marquee-card');
-  marqueeCards.forEach(card => {
+  /* ---- Lightbox click on scroller strip cards ---- */
+  gsCards.forEach(card => {
     card.addEventListener('click', () => {
-      const src = card.getAttribute('data-src');
-      const caption = card.getAttribute('data-caption');
+      const src     = card.getAttribute('data-src');
+      const caption = card.getAttribute('data-caption') || '';
       if (typeof openLightbox === 'function') openLightbox(src, caption);
     });
   });
 
-  updateScrollerUI();
+  /* ---- Lightbox click on masonry grid cards ---- */
+  gridCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const img     = card.querySelector('img');
+      const caption = card.getAttribute('data-caption') || (img ? img.alt : '');
+      if (img && typeof openLightbox === 'function') openLightbox(img.src, caption);
+    });
+  });
+
+  /* ---- Mouse drag scroll for the strip ---- */
+  const row = document.getElementById('photoScrollRow');
+  if (row) {
+    let isDown = false, startX = 0, scrollStart = 0;
+    row.addEventListener('mousedown', e => {
+      isDown = true;
+      startX = e.pageX - row.offsetLeft;
+      scrollStart = row.scrollLeft;
+    });
+    row.addEventListener('mouseleave', () => { isDown = false; });
+    row.addEventListener('mouseup',    () => { isDown = false; });
+    row.addEventListener('mousemove',  e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - row.offsetLeft;
+      row.scrollLeft = scrollStart - (x - startX) * 1.5;
+    });
+  }
+
+  /* ---- Marquee card lightbox clicks ---- */
+  document.querySelectorAll('.marquee-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const src     = card.getAttribute('data-src');
+      const caption = card.getAttribute('data-caption');
+      if (typeof openLightbox === 'function') openLightbox(src, caption);
+    });
+  });
 })();
 
 </script>
