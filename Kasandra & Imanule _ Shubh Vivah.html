@@ -60,6 +60,28 @@ section{padding:clamp(3.5rem,9vw,6rem) 1.25rem;text-align:center;position:relati
 .fam div{background:#fff9ec;border:1px solid var(--gold);padding:1.5rem 1rem;border-radius:4px}
 .fam h3{color:var(--maroon);font-size:1.6rem}.fam .tag{display:block;margin-bottom:.3rem}
 
+/* bride & groom portrait showcase */
+#portrait{background:var(--cream);padding:5rem 1.5rem}
+.portrait-intro{font-family:var(--serif);font-size:1.18rem;font-style:italic;color:var(--maroon);max-width:620px;margin:0 auto 2.5rem;line-height:1.6;text-align:center}
+.portrait-wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem;max-width:960px;margin:0 auto;align-items:stretch}
+@media(max-width:768px){.portrait-wrap{grid-template-columns:1fr;gap:2rem;max-width:440px}}
+.portrait-card{display:flex;flex-direction:column;height:100%;position:relative}
+.portrait-frame{background:#fffbf2;border:1.5px solid var(--gold);border-radius:12px;overflow:hidden;box-shadow:0 16px 45px rgba(92,15,29,.12);display:flex;flex-direction:column;height:100%;position:relative;transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s ease,border-color .3s ease}
+.portrait-frame::before{content:"";position:absolute;inset:6px;border:1px solid rgba(212,168,75,.4);border-radius:8px;pointer-events:none;z-index:2}
+.portrait-card:hover .portrait-frame{transform:translateY(-6px);box-shadow:0 24px 50px rgba(92,15,29,.2);border-color:var(--gold2)}
+.portrait-img-box{position:relative;width:100%;height:450px;overflow:hidden;background:var(--deep);flex-shrink:0}
+@media(max-width:480px){.portrait-img-box{height:390px}}
+.portrait-img-box img{width:100% !important;height:100% !important;object-fit:cover !important;object-position:center 15% !important;display:block;transition:transform .8s ease}
+.portrait-card:hover .portrait-img-box img{transform:scale(1.05)}
+.portrait-badge{position:absolute;top:1.2rem;left:1.2rem;z-index:3;background:rgba(59,9,18,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--gold2);border:1px solid var(--gold);padding:.35rem .9rem;border-radius:30px;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 4px 15px rgba(0,0,0,.25)}
+.portrait-details{padding:1.6rem 1.4rem 1.8rem;display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;background:#fffbf2;position:relative;z-index:1}
+.portrait-name{font-family:var(--serif);font-size:1.65rem;font-weight:600;color:var(--maroon);line-height:1.2;margin-bottom:.25rem}
+.portrait-sanskrit{font-size:.95rem;color:var(--gold);font-weight:600;margin-bottom:.2rem;letter-spacing:.05em}
+.portrait-role{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--maroon2);font-weight:600;margin-bottom:.85rem}
+.portrait-divider{width:48px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin-bottom:.85rem}
+.portrait-quote{font-family:var(--serif);font-size:.95rem;font-style:italic;color:#55343d;line-height:1.55;margin:0;max-width:320px}
+
+
 /* shared slider navigation & controls */
 .slider-wrap-box{position:relative;max-width:1160px;margin:1.8rem auto 0;padding:0;overflow:hidden}
 .slider-nav-btn{display:none !important}
@@ -287,14 +309,43 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
  <div class="tag">The Bride &amp; Groom</div>
  <h2 class="h2 deva">वर एवं वधू</h2>
  <div class="orn">❖</div>
+ <p class="portrait-intro">
+  Two souls joined in timeless devotion, beginning an eternal journey of love, honor, and sacred companionship.
+ </p>
+
  <div class="portrait-wrap">
+  <!-- Bride Card -->
   <div class="portrait-card">
-   <img src="images/bride_editorial.jpg" alt="Kasandra Elena Vance - The Bride" loading="lazy">
-   <div class="portrait-label">Kasandra Elena Vance</div>
+   <div class="portrait-frame">
+    <div class="portrait-img-box">
+     <img src="images/bride_editorial.jpg" alt="Kasandra Elena Vance - The Bride" loading="lazy">
+     <div class="portrait-badge">वधू · The Bride</div>
+    </div>
+    <div class="portrait-details">
+     <h3 class="portrait-name">Kasandra Elena Vance</h3>
+     <p class="portrait-sanskrit deva">॥ सौभाग्यवती भव ॥</p>
+     <p class="portrait-role">The Radiant Bride</p>
+     <div class="portrait-divider"></div>
+     <p class="portrait-quote">“In your eyes, I have found my forever home, my deepest peace, and my truest joy.”</p>
+    </div>
+   </div>
   </div>
+
+  <!-- Groom Card -->
   <div class="portrait-card">
-   <img src="images/groom_editorial.jpg" alt="Imanule David Thorne - The Groom" loading="lazy">
-   <div class="portrait-label">Imanule David Thorne</div>
+   <div class="portrait-frame">
+    <div class="portrait-img-box">
+     <img src="images/groom_editorial.jpg" alt="Imanule David Thome - The Groom" loading="lazy">
+     <div class="portrait-badge">वर · The Groom</div>
+    </div>
+    <div class="portrait-details">
+     <h3 class="portrait-name">Imanule David Thome</h3>
+     <p class="portrait-sanskrit deva">॥ आयुष्मान् भव ॥</p>
+     <p class="portrait-role">The Noble Groom</p>
+     <div class="portrait-divider"></div>
+     <p class="portrait-quote">“With every sacred vow and every heartbeat, I promise to walk beside you for all of eternity.”</p>
+    </div>
+   </div>
   </div>
  </div>
 </div></section>
