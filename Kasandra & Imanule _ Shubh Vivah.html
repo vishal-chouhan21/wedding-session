@@ -29,7 +29,8 @@ section{padding:clamp(3.5rem,9vw,6rem) 1.25rem;text-align:center;position:relati
 #gate{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--gold2);padding:2rem;padding-top:calc(2rem + env(safe-area-inset-top,0px));background:radial-gradient(circle at 50% 40%,var(--maroon2),var(--deep));transition:opacity 1s .9s,visibility 0s 1.9s}
 #gate .door{position:absolute;top:0;bottom:0;width:50%;background:linear-gradient(var(--maroon),var(--deep));transition:transform 1.4s cubic-bezier(.7,0,.2,1);z-index:-1}
 #gate .l{left:0;border-right:2px solid var(--gold)}#gate .r{right:0;border-left:2px solid var(--gold)}
-#gate.open{opacity:0;visibility:hidden}
+#gate.open{opacity:0;visibility:hidden;pointer-events:none !important}
+#gate.open *{pointer-events:none !important}
 #gate.open .l{transform:translateX(-100%)}#gate.open .r{transform:translateX(100%)}
 #gate.open>.gc{opacity:0;transition:opacity .4s}
 .gc{display:flex;flex-direction:column;align-items:center;gap:1rem}
@@ -718,13 +719,13 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
 @media(prefers-reduced-motion:reduce){#mandala{animation:none}.rv{opacity:1;transform:none;transition:none}}
 </style></head>
 <body class="lock">
-<div id="gate"><div class="door l"></div><div class="door r"></div>
+<div id="gate" onclick="openInvitation()"><div class="door l"></div><div class="door r"></div>
  <div class="gc">
   <div class="deva" style="font-size:3rem">ॐ</div>
   <div class="deva" style="font-size:1.5rem">॥ श्री गणेशाय नमः ॥</div>
   <div class="names">Kasandra<br>&amp; Imanule</div>
   <p style="letter-spacing:.25em;font-size:.78rem;text-transform:uppercase">You are cordially invited</p>
-  <button class="btn" id="openBtn">Open Invitation</button>
+  <button class="btn" id="openBtn" onclick="openInvitation()">Open Invitation</button>
  </div></div>
 <button id="music" aria-label="Toggle music">♪</button>
 
@@ -1034,20 +1035,81 @@ document.getElementById('evList').innerHTML=EVENTS.map(function(e){
  for(i=0;i<8;i++){s+='<g transform="rotate('+i*45+')"><path d="M0 -8 Q10 -30 0 -50 Q-10 -30 0 -8Z"/></g>'}
  document.getElementById('mandala').innerHTML=s})();
 /* venue + calendar */
-document.getElementById('vName').textContent=CONFIG.venue;document.getElementById('vAddr').textContent=CONFIG.address;
-document.getElementById('mapBtn').href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(CONFIG.mapQuery);
-(function(){var d=new Date(CONFIG.start),e=new Date(d.getTime()+6*36e5),f=function(x){return x.toISOString().replace(/[-:]|\.\d{3}/g,'')};
- document.getElementById('calBtn').href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Kasandra & Imanule Wedding')+'&dates='+f(d)+'/'+f(e)+'&location='+encodeURIComponent(CONFIG.venue+', '+CONFIG.address)})();
+var vNameEl = document.getElementById('vName'); if(vNameEl) vNameEl.textContent = CONFIG.venue;
+var vAddrEl = document.getElementById('vAddr'); if(vAddrEl) vAddrEl.textContent = CONFIG.address;
+var mapBtnEl = document.getElementById('mapBtn'); if(mapBtnEl) mapBtnEl.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(CONFIG.mapQuery);
+(function(){
+  var calBtn = document.getElementById('calBtn');
+  if(!calBtn) return;
+  var d = new Date(CONFIG.start), e = new Date(d.getTime() + 6 * 36e5), f = function(x){ return x.toISOString().replace(/[-:]|\.\d{3}/g, ''); };
+  calBtn.href = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent('Kasandra & Imanule Wedding') + '&dates=' + f(d) + '/' + f(e) + '&location=' + encodeURIComponent(CONFIG.venue + ', ' + CONFIG.address);
+})();
+
 /* countdown */
-var target=new Date(CONFIG.start).getTime(),p=function(n){return String(n).padStart(2,'0')};
-function tick(){var t=target-Date.now();if(t<=0){['cD','cH','cM','cS'].forEach(function(i){document.getElementById(i).textContent='00'});document.getElementById('cdMsg').textContent='The celebrations have begun!';return}
- document.getElementById('cD').textContent=p(Math.floor(t/864e5));document.getElementById('cH').textContent=p(Math.floor(t%864e5/36e5));document.getElementById('cM').textContent=p(Math.floor(t%36e5/6e4));document.getElementById('cS').textContent=p(Math.floor(t%6e4/1e3))}
-tick();setInterval(tick,1000);
-/* gate + music */
-var aud=document.getElementById('aud'),mb=document.getElementById('music'),gate=document.getElementById('gate');
-document.getElementById('openBtn').onclick=function(){gate.classList.add('open');document.body.classList.remove('lock');mb.classList.add('on');
- aud.volume=.6;aud.play().then(function(){mb.textContent='❚❚'}).catch(function(){mb.textContent='♪'});setTimeout(function(){gate.style.display='none'},2000)};
-mb.onclick=function(){if(aud.paused){aud.play();mb.textContent='❚❚'}else{aud.pause();mb.textContent='♪'}};
+var target = new Date(CONFIG.start).getTime(), p = function(n){ return String(n).padStart(2, '0'); };
+function tick(){
+  var t = target - Date.now();
+  var cdMsg = document.getElementById('cdMsg');
+  if(t <= 0){
+    ['cD','cH','cM','cS'].forEach(function(i){
+      var el = document.getElementById(i);
+      if(el) el.textContent = '00';
+    });
+    if(cdMsg) cdMsg.textContent = 'The celebrations have begun!';
+    return;
+  }
+  var cD = document.getElementById('cD'); if(cD) cD.textContent = p(Math.floor(t / 864e5));
+  var cH = document.getElementById('cH'); if(cH) cH.textContent = p(Math.floor(t % 864e5 / 36e5));
+  var cM = document.getElementById('cM'); if(cM) cM.textContent = p(Math.floor(t % 36e5 / 6e4));
+  var cS = document.getElementById('cS'); if(cS) cS.textContent = p(Math.floor(t % 6e4 / 1e3));
+}
+tick();
+setInterval(tick, 1000);
+
+/* gate + music opening ceremony */
+function openInvitation(e){
+  if(e && e.stopPropagation) e.stopPropagation();
+  var gate = document.getElementById('gate');
+  var mb = document.getElementById('music');
+  var aud = document.getElementById('aud');
+  if(gate){
+    gate.classList.add('open');
+    gate.style.pointerEvents = 'none';
+  }
+  document.body.classList.remove('lock');
+  if(mb) mb.classList.add('on');
+  if(aud){
+    try {
+      aud.volume = 0.6;
+      var p = aud.play();
+      if(p && p.then){
+        p.then(function(){ if(mb) mb.textContent = '❚❚'; })
+         .catch(function(){ if(mb) mb.textContent = '♪'; });
+      }
+    } catch(err){}
+  }
+  setTimeout(function(){
+    if(gate) gate.style.display = 'none';
+  }, 1800);
+}
+window.openInvitation = openInvitation;
+
+var aud = document.getElementById('aud'), mb = document.getElementById('music'), gate = document.getElementById('gate');
+var openBtn = document.getElementById('openBtn');
+if(openBtn) openBtn.onclick = openInvitation;
+if(gate) gate.onclick = openInvitation;
+if(mb){
+  mb.onclick = function(){
+    if(!aud) return;
+    if(aud.paused){
+      aud.play();
+      mb.textContent = '❚❚';
+    } else {
+      aud.pause();
+      mb.textContent = '♪';
+    }
+  };
+}
 /* reveal */
 var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('show');io.unobserve(x.target)}})},{threshold:.15});
 document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
