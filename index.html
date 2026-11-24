@@ -2832,36 +2832,114 @@ const $$ = s => [...document.querySelectorAll(s)];
   render();
 })();
 
-/* ==================== OPENING CEREMONY (3D GATEFOLD INVITATION) ==================== */
+/* ==================== OPENING CEREMONY (3D GATEFOLD INVITATION & CONFETTI) ==================== */
 (function initOpeningCeremony() {
   const ribbonIntro = document.getElementById('ribbonIntro');
   const cutBtn = document.getElementById('cutRibbonBtn');
   const satinBow = document.getElementById('satinBow');
+  const ribbonAssembly = document.getElementById('ribbonAssembly');
+  const royalFolio = document.getElementById('royalFolio');
   const skipBtn = document.getElementById('skipIntroBtn');
   const enterBtn = document.getElementById('interiorEnterBtn');
+  const introFx = document.getElementById('introFx');
+
+  if (!ribbonIntro) return;
+
   let opened = false;
+  let fxCtx = null;
+  let particles = [];
+  let animRun = false;
+
+  // Initialize Canvas for Confetti FX
+  if (introFx) {
+    fxCtx = introFx.getContext('2d');
+    function resizeFx() {
+      if (!introFx) return;
+      introFx.width = window.innerWidth;
+      introFx.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeFx, { passive: true });
+    resizeFx();
+  }
+
+  function spawnConfetti(x, y, count = 100) {
+    if (!introFx || !fxCtx) return;
+    const colors = ['#B69A68', '#D4AF37', '#EDE5D8', '#FFFFFF', '#DC2626', '#E5DCCE', '#78816D'];
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: x || window.innerWidth / 2,
+        y: y || window.innerHeight / 2,
+        vx: (Math.random() - 0.5) * 18,
+        vy: (Math.random() - 0.5) * 16 - 4,
+        size: 4 + Math.random() * 8,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 6.28,
+        vRot: (Math.random() - 0.5) * 0.25,
+        life: 0,
+        maxLife: 75 + Math.random() * 55
+      });
+    }
+    if (!animRun) {
+      animRun = true;
+      requestAnimationFrame(renderFx);
+    }
+  }
+
+  function renderFx() {
+    if (!fxCtx || !introFx) return;
+    fxCtx.clearRect(0, 0, introFx.width, introFx.height);
+    particles = particles.filter(p => p.life < p.maxLife);
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.24; // gravity
+      p.vx *= 0.98;
+      p.rotation += p.vRot;
+      p.life++;
+
+      fxCtx.save();
+      fxCtx.translate(p.x, p.y);
+      fxCtx.rotate(p.rotation);
+      fxCtx.fillStyle = p.color;
+      fxCtx.globalAlpha = Math.max(0, 1 - p.life / p.maxLife);
+      fxCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+      fxCtx.restore();
+    });
+    if (particles.length > 0) {
+      requestAnimationFrame(renderFx);
+    } else {
+      animRun = false;
+    }
+  }
 
   function untie() {
-    if (opened) return;
+    if (opened) {
+      finishOpening();
+      return;
+    }
     opened = true;
 
-    // Untie ribbon & pop knot
+    // Step 1: Pop the satin bow & slide ribbon bands
     ribbonIntro.classList.add('untied');
 
-    // Burst golden sparkles from bow
-    if (satinBow) {
-      const rect = satinBow.getBoundingClientRect();
-      spawnConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 110);
-    } else {
-      spawnConfetti(window.innerWidth / 2, window.innerHeight / 2, 110);
+    // Burst golden sparkles from bow position
+    try {
+      if (satinBow) {
+        const rect = satinBow.getBoundingClientRect();
+        spawnConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2, 110);
+      } else {
+        spawnConfetti(window.innerWidth / 2, window.innerHeight / 2, 110);
+      }
+    } catch (err) {
+      console.warn('Sparkle effect skipped:', err);
     }
 
-    // Swing open 3D gatefold double doors
+    // Step 2: Swing open 3D gatefold double doors
     setTimeout(() => {
       ribbonIntro.classList.add('doors-open');
     }, 450);
 
-    // Auto fade to main website
+    // Step 3: Transition to full website
     setTimeout(() => {
       finishOpening();
     }, 2400);
@@ -2870,21 +2948,61 @@ const $$ = s => [...document.querySelectorAll(s)];
   function finishOpening() {
     ribbonIntro.classList.add('opened');
     document.body.classList.remove('lock-scroll');
-    showToast("✨ Welcome to Kasandra & Imanule's Celebration");
+    if (document.documentElement) document.documentElement.classList.remove('lock-scroll');
+    if (typeof showToast === 'function') {
+      showToast("✨ Welcome to Kasandra & Imanule's Celebration");
+    }
     setTimeout(() => {
-      ribbonIntro.remove();
+      if (ribbonIntro && ribbonIntro.parentNode) {
+        ribbonIntro.remove();
+      }
     }, 1200);
   }
 
-  if (cutBtn) cutBtn.addEventListener('click', untie);
-  if (satinBow) satinBow.addEventListener('click', untie);
-  if (enterBtn) enterBtn.addEventListener('click', finishOpening);
-  if (skipBtn) {
-    skipBtn.addEventListener('click', () => {
-      opened = true;
+  // Bind clicks & touch events to all interactive elements
+  const triggers = [cutBtn, satinBow, ribbonAssembly, royalFolio];
+  triggers.forEach(el => {
+    if (!el) return;
+    el.addEventListener('click', (e) => {
+      if (e && e.stopPropagation) e.stopPropagation();
+      untie();
+    });
+    el.addEventListener('touchend', (e) => {
+      if (e && e.stopPropagation) e.stopPropagation();
+      untie();
+    }, { passive: true });
+  });
+
+  if (enterBtn) {
+    enterBtn.addEventListener('click', (e) => {
+      if (e && e.stopPropagation) e.stopPropagation();
       finishOpening();
     });
+    enterBtn.addEventListener('touchend', (e) => {
+      if (e && e.stopPropagation) e.stopPropagation();
+      finishOpening();
+    }, { passive: true });
   }
+
+  if (skipBtn) {
+    skipBtn.addEventListener('click', (e) => {
+      if (e && e.stopPropagation) e.stopPropagation();
+      finishOpening();
+    });
+    skipBtn.addEventListener('touchend', (e) => {
+      if (e && e.stopPropagation) e.stopPropagation();
+      finishOpening();
+    }, { passive: true });
+  }
+
+  // Backup fallback: Clicking anywhere on ribbonIntro backdrop if card is already open
+  ribbonIntro.addEventListener('click', (e) => {
+    if (opened) {
+      finishOpening();
+    } else {
+      untie();
+    }
+  });
 })();
 
 /* ==================== INTERACTIVE GALLERY SCROLLER ENGINE ==================== */
