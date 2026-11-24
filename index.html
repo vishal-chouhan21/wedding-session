@@ -62,26 +62,29 @@ section{padding:clamp(3.5rem,9vw,6rem) 1.25rem;text-align:center;position:relati
 
 /* events */
 #events{background:var(--cream)}
-.ev{display:grid;gap:1.5rem;margin-top:2.5rem;text-align:left;max-width:880px;margin-left:auto;margin-right:auto}
-.card{display:grid;grid-template-columns:1fr;gap:0;background:var(--ivory);border:1px solid var(--gold);border-radius:6px;overflow:hidden;position:relative;transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s ease,border-color .3s}
-@media(min-width:680px){.card{grid-template-columns:220px 1fr}}
-.card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(92,15,29,.18);border-color:var(--gold2)}
+.ev{display:grid;gap:1.5rem;margin-top:2.5rem;text-align:left;max-width:960px;margin-left:auto;margin-right:auto;grid-template-columns:1fr}
+@media(min-width:680px){.ev{grid-template-columns:repeat(2,1fr)}}
+.card{display:flex;flex-direction:column;height:100%;background:var(--ivory);border:1.5px solid var(--gold);border-radius:6px;overflow:hidden;position:relative;transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s ease,border-color .3s}
+.card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(92,15,29,.2);border-color:var(--gold2)}
 .card.main{background:linear-gradient(135deg,var(--maroon),var(--deep));color:var(--cream);border-color:var(--gold)}
 .card.main h3,.card.main .d b{color:var(--gold2)}
+.card.main .h-sub{color:var(--gold2);opacity:.95}
 .card.main .t{color:var(--gold2);opacity:.95}
 .card.main p{color:rgba(244,230,200,.95)}
-.card-thumb{position:relative;overflow:hidden;height:100%;min-height:160px;background:var(--deep)}
+.card-thumb{width:100%;height:220px;min-height:220px;max-height:220px;position:relative;overflow:hidden;background:var(--deep);flex-shrink:0}
 .card-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease}
 .card:hover .card-thumb img{transform:scale(1.08)}
-.card-content-wrap{display:grid;grid-template-columns:74px 1fr;gap:1.2rem;padding:1.4rem 1.2rem;align-items:center}
-@media(max-width:480px){.card-content-wrap{grid-template-columns:60px 1fr;padding:1.1rem .9rem;gap:.8rem}}
-.d{text-align:center;border-right:1px solid var(--gold);padding-right:1rem}
-.d b{display:block;font:600 2rem var(--serif);color:var(--maroon);line-height:1}.d span{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase}
-.card h3{font-size:1.5rem;color:var(--maroon);line-height:1.2;font-family:var(--serif)}.card h3 small{font:400 .95rem var(--deva);color:var(--gold);margin-left:.5rem;filter:brightness(.85)}
-.card.main h3 small{filter:none;color:var(--gold2)}
-.card .t{font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--maroon2);font-weight:500;margin:.35rem 0 .4rem}
-.card.main .t{color:var(--gold2)}
-.card p{font-size:.92rem;line-height:1.6}
+.card-body{padding:1.25rem 1.15rem 1.4rem;display:flex;flex-direction:column;flex:1}
+.card-header-row{display:flex;align-items:center;gap:1rem;margin-bottom:.85rem;padding-bottom:.85rem;border-bottom:1px solid rgba(212,168,75,.3)}
+.card.main .card-header-row{border-bottom-color:rgba(240,210,138,.35)}
+.d{min-width:62px;text-align:center;border-right:1px solid var(--gold);padding-right:.85rem;flex-shrink:0}
+.d b{display:block;font:600 1.9rem var(--serif);color:var(--maroon);line-height:1}.d span{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase}
+.card-heading-box{flex:1}
+.card h3{font-size:1.35rem;color:var(--maroon);line-height:1.2;font-family:var(--serif);margin-bottom:.15rem}
+.h-sub{font-size:.9rem;color:var(--gold);font-family:var(--deva);filter:brightness(.85);margin-bottom:.2rem}
+.card.main .h-sub{filter:none}
+.card .t{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--maroon2);font-weight:600}
+.card-desc{font-size:.9rem;line-height:1.6;margin-top:auto}
 .dress{margin-top:2rem;font-family:var(--serif);font-style:italic;color:var(--maroon);font-size:1.15rem}
 /* couple portrait */
 #portrait{background:var(--ivory);padding-top:0}
@@ -96,9 +99,10 @@ section{padding:clamp(3.5rem,9vw,6rem) 1.25rem;text-align:center;position:relati
 .gal-scroll{display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:.5rem 0 1.5rem;cursor:grab;scrollbar-width:none}
 .gal-scroll:active{cursor:grabbing}
 .gal-scroll::-webkit-scrollbar{display:none}
-.gal-card{flex:0 0 clamp(280px,36vw,380px);height:clamp(380px,50vh,490px);scroll-snap-align:center;border-radius:6px;overflow:hidden;position:relative;border:1.5px solid rgba(212,168,75,.4);cursor:pointer;transition:transform .4s,border-color .3s,box-shadow .4s}
+.gal-card{flex:0 0 320px;width:320px;height:440px;min-height:440px;max-height:440px;scroll-snap-align:center;border-radius:6px;overflow:hidden;position:relative;border:1.5px solid rgba(212,168,75,.4);cursor:pointer;transition:transform .4s,border-color .3s,box-shadow .4s}
+@media(max-width:600px){.gal-card{flex:0 0 280px;width:280px;height:400px;min-height:400px;max-height:400px}}
 .gal-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 18px 40px rgba(59,9,18,.25)}
-.gal-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease}
+.gal-card img{width:100% !important;height:100% !important;object-fit:cover !important;display:block;transition:transform .8s ease}
 .gal-card:hover img{transform:scale(1.06)}
 .gal-card-info{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,transparent 0%,rgba(30,5,10,.65) 25%,rgba(30,5,10,.95) 100%);padding:2rem 1.25rem 1.15rem;color:var(--cream);text-align:left}
 .gal-card-tag{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);font-weight:600;margin-bottom:.25rem;display:inline-block}
@@ -106,14 +110,13 @@ section{padding:clamp(3.5rem,9vw,6rem) 1.25rem;text-align:center;position:relati
 .gal-card-desc{font-size:.82rem;line-height:1.5;color:rgba(251,243,226,.88);font-family:var(--sans);font-weight:300}
 .gal-hint{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--maroon2);opacity:.8;text-align:center;margin-top:.75rem}
 /* grid */
-.gal-grid{display:grid;gap:1.5rem;grid-template-columns:1fr;margin-top:3rem;max-width:880px;margin-left:auto;margin-right:auto}
+.gal-grid{display:grid;gap:1.5rem;grid-template-columns:1fr;margin-top:3rem;max-width:960px;margin-left:auto;margin-right:auto}
 @media(min-width:600px){.gal-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:900px){.gal-grid{grid-template-columns:repeat(3,1fr)}}
-.gal-grid-card{background:#fff9ec;border:1.5px solid rgba(212,168,75,.4);border-radius:6px;overflow:hidden;cursor:pointer;transition:transform .4s,box-shadow .4s,border-color .3s;display:flex;flex-direction:column}
+.gal-grid-card{background:#fff9ec;border:1.5px solid rgba(212,168,75,.4);border-radius:6px;overflow:hidden;cursor:pointer;transition:transform .4s,box-shadow .4s,border-color .3s;display:flex;flex-direction:column;height:100%}
 .gal-grid-card:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(59,9,18,.2);border-color:var(--gold)}
-.gal-grid-img-wrap{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--deep)}
-.gal-grid-card.tall .gal-grid-img-wrap{aspect-ratio:3/4}
-.gal-grid-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
+.gal-grid-img-wrap{width:100%;height:220px;min-height:220px;max-height:220px;position:relative;overflow:hidden;background:var(--deep);flex-shrink:0}
+.gal-grid-img-wrap img{width:100% !important;height:100% !important;object-fit:cover !important;display:block;transition:transform .7s ease}
 .gal-grid-card:hover .gal-grid-img-wrap img{transform:scale(1.07)}
 .gal-grid-body{padding:1.1rem 1rem 1.2rem;text-align:left;flex:1;display:flex;flex-direction:column}
 .gal-grid-meta{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--maroon2);font-weight:600;margin-bottom:.25rem}
@@ -290,7 +293,7 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
  <!-- Gallery Grid with Narrative Descriptions -->
  <div class="gal-grid rv">
   
-  <div class="gal-grid-card tall" data-src="images/couple_editorial.jpg" data-title="Gala Reception Elegance · राजसी रिसेप्शन" data-desc="Kasandra and Imanule celebrating in luxury black-tie attire under twilight crystal chandeliers.">
+  <div class="gal-grid-card" data-src="images/couple_editorial.jpg" data-title="Gala Reception Elegance · राजसी रिसेप्शन" data-desc="Kasandra and Imanule celebrating in luxury black-tie attire under twilight crystal chandeliers.">
    <div class="gal-grid-img-wrap"><img src="images/couple_editorial.jpg" alt="Royal Celebration" loading="lazy"></div>
    <div class="gal-grid-body">
     <span class="gal-grid-meta">Reception · प्रीतिभोज</span>
@@ -299,7 +302,7 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
    </div>
   </div>
 
-  <div class="gal-grid-card tall" data-src="images/couple_sunlight.jpg" data-title="Golden Hour Embrace · स्वर्णिम आलिंगन" data-desc="Intimate golden hour forehead embrace with radiant sunlight flare as two souls unite in lifelong devotion.">
+  <div class="gal-grid-card" data-src="images/couple_sunlight.jpg" data-title="Golden Hour Embrace · स्वर्णिम आलिंगन" data-desc="Intimate golden hour forehead embrace with radiant sunlight flare as two souls unite in lifelong devotion.">
    <div class="gal-grid-img-wrap"><img src="images/couple_sunlight.jpg" alt="Golden Hour Romance" loading="lazy"></div>
    <div class="gal-grid-body">
     <span class="gal-grid-meta">Romance · प्रेम</span>
@@ -317,7 +320,7 @@ footer p{font-family:var(--serif);font-size:1.3rem;font-style:italic}
    </div>
   </div>
 
-  <div class="gal-grid-card tall" data-src="images/wedding_hands.jpg" data-title="Bridal Mehendi &amp; Chooda · मेहंदी एवं चूड़ा" data-desc="Sacred bridal mehendi, auspicious red chooda bangles, and floral garlands joined in eternal devotion.">
+  <div class="gal-grid-card" data-src="images/wedding_hands.jpg" data-title="Bridal Mehendi &amp; Chooda · मेहंदी एवं चूड़ा" data-desc="Sacred bridal mehendi, auspicious red chooda bangles, and floral garlands joined in eternal devotion.">
    <div class="gal-grid-img-wrap"><img src="images/wedding_hands.jpg" alt="Bridal Mehendi" loading="lazy"></div>
    <div class="gal-grid-body">
     <span class="gal-grid-meta">Henna · मेहंदी</span>
@@ -388,13 +391,16 @@ var EVENTS=[
 document.getElementById('evList').innerHTML=EVENTS.map(function(e){
  return '<div class="card rv'+(e.main?' main':'')+'">'+
   '<div class="card-thumb"><img src="'+e.img+'" alt="'+e.alt+'" loading="lazy"></div>'+
-  '<div class="card-content-wrap">'+
-   '<div class="d"><b>'+e.d+'</b><span>'+e.m+'<br>'+e.day+'</span></div>'+
-   '<div>'+
-    '<h3>'+e.n+'<small>'+e.h+'</small></h3>'+
-    '<div class="t">'+e.t+'</div>'+
-    '<p>'+e.p+'</p>'+
+  '<div class="card-body">'+
+   '<div class="card-header-row">'+
+    '<div class="d"><b>'+e.d+'</b><span>'+e.m+'<br>'+e.day+'</span></div>'+
+    '<div class="card-heading-box">'+
+     '<h3>'+e.n+'</h3>'+
+     '<div class="h-sub deva">'+e.h+'</div>'+
+     '<div class="t">'+e.t+'</div>'+
+    '</div>'+
    '</div>'+
+   '<p class="card-desc">'+e.p+'</p>'+
   '</div>'+
  '</div>';
 }).join('');
