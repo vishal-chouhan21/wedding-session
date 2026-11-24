@@ -3417,6 +3417,48 @@ const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 
 
+/* ==================== SCROLL REVEAL OBSERVER ==================== */
+(function initScrollReveal() {
+  // If user prefers reduced motion, reveal everything immediately
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+    return;
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: show everything
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  // Observe all .reveal elements that exist now, and re-observe after main site loads
+  function observeAll() {
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (!el.classList.contains('active')) observer.observe(el);
+    });
+  }
+
+  observeAll();
+
+  // Also trigger once immediately for elements already in view
+  setTimeout(observeAll, 100);
+  setTimeout(observeAll, 600);
+  setTimeout(observeAll, 1500);
+})();
+
+
 /* ==================== AMBIENT STARLIGHT PARTICLES ==================== */
 (function initAmbientStarlight() {
   const canvas = document.getElementById('ambientCanvas');
@@ -3590,6 +3632,8 @@ const $$ = s => [...document.querySelectorAll(s)];
       if (ribbonIntro && ribbonIntro.parentNode) {
         ribbonIntro.remove();
       }
+      // Trigger scroll reveals now that the main site is visible
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
     }, 1200);
   }
 
