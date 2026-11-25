@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kasandra &amp; Imanule | Shubh Vivah</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Tiro+Devanagari+Hindi&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Tiro+Devanagari+Hindi&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{--maroon:#5c0f1d;--maroon2:#7a1a2a;--deep:#3b0912;--gold:#d4a84b;--gold2:#f0d28a;--ivory:#fbf3e2;--cream:#f4e6c8;--ink:#3b0912;
 --serif:'Cormorant Garamond',Georgia,serif;--deva:'Tiro Devanagari Hindi','Noto Serif Devanagari',serif;--sans:'Jost',system-ui,sans-serif;color-scheme:light}
@@ -339,7 +339,19 @@ section{padding:clamp(3.5rem,9vw,6rem) 1.25rem;text-align:center;position:relati
 #count .h2{color:#fff}
 .cd{display:flex;justify-content:center;gap:clamp(.5rem,2.5vw,1.4rem);margin:2rem 0}
 .cd div{min-width:68px;border:1px solid var(--gold);padding:1rem .4rem;border-radius:4px;background:rgba(0,0,0,.2)}
-.cd b{display:block;font:500 clamp(1.8rem,7vw,3rem) var(--serif);color:#fff;line-height:1}.cd span{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase}
+.cd b {
+  display: block;
+  font-family: 'Cinzel', 'Playfair Display', 'DM Sans', Georgia, serif;
+  font-size: clamp(1.8rem, 7vw, 3rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  font-variant-numeric: lining-nums tabular-nums;
+  -webkit-font-feature-settings: "lnum" 1, "tnum" 1, "calt" 0, "liga" 0;
+  font-feature-settings: "lnum" 1, "tnum" 1, "calt" 0, "liga" 0;
+  letter-spacing: 0.5px;
+  text-align: center;
+}.cd span{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase}
 /* bride & groom side-by-side grid (no slider) */
 #portrait{background:var(--cream);padding:4.5rem 1.25rem}
 .portrait-intro{font-family:var(--serif);font-size:1.15rem;font-style:italic;color:var(--maroon);max-width:620px;margin:0 auto 2rem;line-height:1.6;text-align:center}
